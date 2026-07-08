@@ -31,7 +31,7 @@ export default function HomePage() {
             right: 0,
             bottom: 0,
             top: 0,
-            width: '60%',
+            width: '75%',
             pointerEvents: 'none',
           }}
         >
@@ -44,7 +44,7 @@ export default function HomePage() {
               objectFit: 'contain',
               objectPosition: 'right bottom',
               mixBlendMode: 'multiply',
-              filter: 'brightness(2.2) contrast(0.85)',
+              filter: 'brightness(3.2) contrast(0.8)',
             }}
           />
           {/* Fade from left */}
