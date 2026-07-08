@@ -15,7 +15,8 @@ export default function HomePage() {
       <section
         style={{
           position: 'relative',
-          minHeight: '100svh',
+          minHeight: '100vh',
+          paddingTop: '72px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
