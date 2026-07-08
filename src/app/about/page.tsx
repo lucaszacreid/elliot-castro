@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -61,32 +62,22 @@ export default function AboutPage() {
         >
           {/* Sidebar */}
           <aside>
-            {/* Photo placeholder */}
             <div
               style={{
                 width: '100%',
                 aspectRatio: '4/5',
-                background: 'var(--color-ink-soft)',
-                border: '1px solid var(--color-border)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                position: 'relative',
+                overflow: 'hidden',
                 marginBottom: '2rem',
               }}
             >
-              <p
-                style={{
-                  fontSize: '0.75rem',
-                  color: 'var(--color-muted)',
-                  textAlign: 'center',
-                  letterSpacing: '0.06em',
-                  padding: '1rem',
-                }}
-              >
-                Headshot placeholder
-                <br />
-                Replace with /about-photo.jpg
-              </p>
+              <Image
+                src="/about-photo.jpg"
+                alt="Elliot Castro speaking on stage"
+                fill
+                priority
+                style={{ objectFit: 'cover', objectPosition: 'center top' }}
+              />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
