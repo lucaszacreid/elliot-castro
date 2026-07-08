@@ -62,23 +62,19 @@ export default function AboutPage() {
         >
           {/* Sidebar */}
           <aside>
-            <div
+            <Image
+              src="/about-photo.jpg"
+              alt="Elliot Castro speaking on stage"
+              width={600}
+              height={750}
+              priority
               style={{
                 width: '100%',
-                aspectRatio: '4/5',
-                position: 'relative',
-                overflow: 'hidden',
+                height: 'auto',
+                display: 'block',
                 marginBottom: '2rem',
               }}
-            >
-              <Image
-                src="/about-photo.jpg"
-                alt="Elliot Castro speaking on stage"
-                fill
-                priority
-                style={{ objectFit: 'cover', objectPosition: 'center top' }}
-              />
-            </div>
+            />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {[
