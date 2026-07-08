@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const RECIPIENT = process.env.CONTACT_EMAIL ?? 'hello@elliotcastro.com'
 
 const subjectByType: Record<string, string> = {
@@ -29,6 +27,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
+    const resend = new Resend(process.env.RESEND_API_KEY)
     const subject = `${subjectByType[type] ?? '[Enquiry]'} from ${name}`
     const text = formatBody(data)
 
