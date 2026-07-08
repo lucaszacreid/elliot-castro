@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const RECIPIENT = process.env.CONTACT_EMAIL ?? 'hello@elliotcastro.com'
+const RECIPIENT = process.env.CONTACT_EMAIL ?? 'elliot@elliotcastro.com'
 
 const subjectByType: Record<string, string> = {
   keynote: '[Keynote Enquiry]',

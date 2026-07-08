@@ -78,10 +78,10 @@ export default function ContactPage() {
             I respond to all serious enquiries personally. Use the forms below or
             contact me directly at{' '}
             <a
-              href="mailto:hello@elliotcastro.com"
+              href="mailto:elliot@elliotcastro.com"
               style={{ color: 'var(--color-cream)', borderBottom: '1px solid var(--color-border)' }}
             >
-              hello@elliotcastro.com
+              elliot@elliotcastro.com
             </a>
           </p>
         </div>
@@ -183,14 +183,14 @@ export default function ContactPage() {
               Or email directly:
               <br />
               <a
-                href="mailto:hello@elliotcastro.com"
+                href="mailto:elliot@elliotcastro.com"
                 style={{
                   color: 'var(--color-cream)',
                   display: 'block',
                   marginTop: '0.25rem',
                 }}
               >
-                hello@elliotcastro.com
+                elliot@elliotcastro.com
               </a>
             </p>
           </div>
