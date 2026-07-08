@@ -20,51 +20,59 @@ export default function HomePage() {
           flexDirection: 'column',
           justifyContent: 'flex-end',
           overflow: 'hidden',
+          background: '#0C0B0B',
         }}
       >
-        {/* Hero image — replace with Elliot's eyes/face photo */}
+        {/* Portrait — right side, blended in */}
         <div
+          aria-hidden="true"
           style={{
             position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to bottom, #1a0a0a 0%, #0C0B0B 100%)',
+            right: 0,
+            bottom: 0,
+            top: 0,
+            width: '60%',
+            pointerEvents: 'none',
           }}
-          aria-hidden="true"
         >
-          {/* Placeholder until real photo is provided */}
+          <Image
+            src="/hero-portrait.png"
+            alt=""
+            fill
+            priority
+            style={{
+              objectFit: 'contain',
+              objectPosition: 'right bottom',
+              mixBlendMode: 'multiply',
+            }}
+          />
+          {/* Fade from left — merges portrait into background */}
           <div
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: `
-                radial-gradient(ellipse 60% 50% at 50% 35%, rgba(139,28,28,0.12) 0%, transparent 70%),
-                repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(42,40,38,0.3) 80px)
-              `,
+              background: 'linear-gradient(to right, #0C0B0B 0%, rgba(12,11,11,0.85) 25%, rgba(12,11,11,0.3) 55%, transparent 80%)',
             }}
           />
-          {/* When Elliot's photo is available, swap this for:
-          <Image
-            src="/hero.jpg"
-            alt="Elliot Castro"
-            fill
-            priority
-            style={{ objectFit: 'cover', objectPosition: 'center 30%', mixBlendMode: 'luminosity', opacity: 0.6 }}
+          {/* Fade from top */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to bottom, #0C0B0B 0%, rgba(12,11,11,0.4) 20%, transparent 50%)',
+            }}
           />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(12,11,11,0.3) 0%, rgba(12,11,11,0.85) 70%, #0C0B0B 100%)' }} />
-          */}
+          {/* Fade from bottom */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top, #0C0B0B 0%, rgba(12,11,11,0.6) 20%, transparent 50%)',
+            }}
+          />
         </div>
 
-        {/* Gradient overlay — ensures legibility */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'linear-gradient(to bottom, rgba(12,11,11,0) 40%, rgba(12,11,11,0.95) 100%)',
-          }}
-        />
-
+        {/* Text content */}
         <div
           style={{
             position: 'relative',
@@ -93,7 +101,7 @@ export default function HomePage() {
               fontWeight: 700,
               lineHeight: 1.1,
               color: 'var(--color-cream)',
-              maxWidth: '720px',
+              maxWidth: '540px',
               marginBottom: '2rem',
             }}
           >
@@ -104,7 +112,7 @@ export default function HomePage() {
             style={{
               fontSize: '1.0625rem',
               color: 'var(--color-cream-muted)',
-              maxWidth: '480px',
+              maxWidth: '420px',
               lineHeight: 1.7,
               marginBottom: '3rem',
             }}
