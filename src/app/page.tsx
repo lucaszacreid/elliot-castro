@@ -44,14 +44,15 @@ export default function HomePage() {
               objectFit: 'contain',
               objectPosition: 'right bottom',
               mixBlendMode: 'multiply',
+              filter: 'brightness(2.2) contrast(0.85)',
             }}
           />
-          {/* Fade from left — merges portrait into background */}
+          {/* Fade from left */}
           <div
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to right, #0C0B0B 0%, rgba(12,11,11,0.85) 25%, rgba(12,11,11,0.3) 55%, transparent 80%)',
+              background: 'linear-gradient(to right, #0C0B0B 0%, rgba(12,11,11,0.7) 20%, rgba(12,11,11,0.15) 50%, transparent 75%)',
             }}
           />
           {/* Fade from top */}
@@ -59,7 +60,7 @@ export default function HomePage() {
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to bottom, #0C0B0B 0%, rgba(12,11,11,0.4) 20%, transparent 50%)',
+              background: 'linear-gradient(to bottom, #0C0B0B 0%, rgba(12,11,11,0.3) 15%, transparent 40%)',
             }}
           />
           {/* Fade from bottom */}
@@ -67,7 +68,7 @@ export default function HomePage() {
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to top, #0C0B0B 0%, rgba(12,11,11,0.6) 20%, transparent 50%)',
+              background: 'linear-gradient(to top, #0C0B0B 0%, rgba(12,11,11,0.4) 15%, transparent 40%)',
             }}
           />
         </div>
