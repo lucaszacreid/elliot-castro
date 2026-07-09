@@ -27,6 +27,7 @@ export default function HomePage() {
         {/* Portrait — right side, blended in */}
         <div
           aria-hidden="true"
+          className="m-hero-portrait"
           style={{
             position: 'absolute',
             right: 0,
@@ -76,6 +77,7 @@ export default function HomePage() {
 
         {/* Text content */}
         <div
+          className="m-hero-content"
           style={{
             position: 'relative',
             maxWidth: '1200px',
@@ -97,6 +99,7 @@ export default function HomePage() {
           </p>
 
           <h1
+            className="m-hero-h1"
             style={{
               fontFamily: 'var(--font-playfair), Georgia, serif',
               fontSize: 'clamp(2.5rem, 6vw, 5rem)',
@@ -111,6 +114,7 @@ export default function HomePage() {
           </h1>
 
           <p
+            className="m-hero-para"
             style={{
               fontSize: '1.0625rem',
               color: 'var(--color-cream-muted)',
@@ -156,6 +160,7 @@ export default function HomePage() {
 
       {/* What I do */}
       <section
+        className="m-section"
         style={{
           borderTop: '1px solid var(--color-border)',
           padding: '6rem 2rem',
@@ -163,6 +168,7 @@ export default function HomePage() {
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <p
+            className="m-section-label"
             style={{
               fontSize: '0.75rem',
               letterSpacing: '0.12em',
@@ -203,6 +209,7 @@ export default function HomePage() {
             ].map((item, i) => (
               <div
                 key={item.label}
+                className="m-card"
                 style={{
                   padding: '3rem',
                   borderLeft: i === 0 ? '1px solid var(--color-border)' : undefined,
@@ -251,6 +258,7 @@ export default function HomePage() {
 
       {/* Pull quote */}
       <section
+        className="m-section"
         style={{
           padding: '6rem 2rem',
           borderTop: '1px solid var(--color-border)',
@@ -290,6 +298,7 @@ export default function HomePage() {
 
       {/* Insights preview */}
       <section
+        className="m-section"
         style={{
           borderTop: '1px solid var(--color-border)',
           padding: '6rem 2rem',
@@ -297,6 +306,7 @@ export default function HomePage() {
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div
+            className="m-section-label"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -359,6 +369,7 @@ export default function HomePage() {
               <Link
                 key={post.slug}
                 href={`/insights/${post.slug}`}
+                className="m-card"
                 style={{
                   display: 'block',
                   padding: '2.5rem',
@@ -404,6 +415,7 @@ export default function HomePage() {
 
       {/* CTA strip */}
       <section
+        className="m-section"
         style={{
           borderTop: '1px solid var(--color-border)',
           padding: '5rem 2rem',

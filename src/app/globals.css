@@ -54,3 +54,26 @@ a {
 input, textarea, select {
   font-family: var(--font-inter), sans-serif;
 }
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  /* Hero */
+  .m-hero-content    { padding: 0 1.25rem 3rem !important; }
+  .m-hero-h1         { font-size: clamp(1.625rem, 6vw, 2.25rem) !important; margin-bottom: 1rem !important; }
+  .m-hero-para       { font-size: 0.9375rem !important; margin-bottom: 2rem !important; max-width: 100% !important; }
+  .m-hero-portrait   { width: 80% !important; }
+
+  /* Section spacing */
+  .m-section         { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+  .m-section-label   { margin-bottom: 2rem !important; }
+
+  /* Cards */
+  .m-card            { padding: 1.5rem !important; }
+
+  /* Insights featured post — stack columns */
+  .m-insight-feat    { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+
+  /* Insights list row — hide date/time columns, just show content */
+  .m-insight-row     { grid-template-columns: 1fr !important; }
+  .m-insight-row-meta { display: none !important; }
+}
