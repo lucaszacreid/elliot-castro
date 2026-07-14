@@ -46,7 +46,7 @@ export default function HomePage() {
               objectFit: 'contain',
               objectPosition: 'right bottom',
               mixBlendMode: 'multiply',
-              filter: 'brightness(10) contrast(0.85)',
+              filter: 'brightness(15) contrast(1)',
             }}
           />
           {/* Fade from left */}
