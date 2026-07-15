@@ -33,10 +33,10 @@ export default function HomePage() {
       <section className="hero-section">
         <div className="hero-portrait" aria-hidden="true">
           <Image
-            src="/hero-lander.jpg"
+            src="/hero-lander.png"
             alt=""
-            width={675}
-            height={817}
+            width={1144}
+            height={1376}
             priority
             style={{ height: '100%', width: 'auto', maxWidth: '60%', objectFit: 'contain', objectPosition: 'bottom right' }}
           />

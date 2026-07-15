@@ -47,13 +47,20 @@ export default function Nav() {
   }, [])
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
+  const isHome = pathname === '/'
 
-  // Hero is now white — nav is always light, just gains shadow on scroll
-  const navBg = scrolled ? 'rgba(255,255,255,0.97)' : '#fff'
-  const navBorder = scrolled ? '#e5e5e5' : 'transparent'
-  const logoColor = '#111111'
-  const linkColor = (active: boolean) => active ? '#111111' : '#737373'
-  const hamburgerColor = '#111111'
+  // On homepage: transparent over dark hero with white text → white nav on scroll
+  // On all other pages: always solid white with dark text
+  const navBg = isHome
+    ? scrolled ? 'rgba(255,255,255,0.97)' : 'transparent'
+    : '#fff'
+  const navBorder = isHome && !scrolled ? 'transparent' : '#e5e5e5'
+  const logoColor = isHome && !scrolled ? '#fff' : '#111111'
+  const linkColor = (active: boolean) =>
+    isHome && !scrolled
+      ? active ? '#fff' : 'rgba(255,255,255,0.65)'
+      : active ? '#111111' : '#737373'
+  const hamburgerColor = isHome && !scrolled ? '#fff' : '#111111'
 
   return (
     <header style={{

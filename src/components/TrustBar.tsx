@@ -12,7 +12,7 @@ const items = [...half, ...half]
 
 export default function TrustBar() {
   return (
-    <div style={{ background: '#f5f5f5', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5', padding: '1.25rem 0' }}>
+    <div style={{ background: '#ffffff', borderTop: '1px solid #e8e8e8', borderBottom: '1px solid #e8e8e8', padding: '1.25rem 0' }}>
       <div className="trust-bar-inner">
         <div className="trust-track">
           {items.map((logo, i) => (
