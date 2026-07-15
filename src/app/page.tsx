@@ -38,7 +38,7 @@ export default function HomePage() {
             width={1144}
             height={1376}
             priority
-            style={{ height: '100%', width: 'auto', maxWidth: '60%', objectFit: 'contain', objectPosition: 'bottom right' }}
+            style={{ height: '100%', width: 'auto', maxWidth: '70%', objectFit: 'contain', objectPosition: 'bottom right' }}
           />
         </div>
         <div className="hero-gradient" aria-hidden="true" />
@@ -50,10 +50,6 @@ export default function HomePage() {
           <Link href="/contact" className="hero-cta">
             Book Elliot
           </Link>
-        </div>
-        {/* Trust bar anchored to hero bottom */}
-        <div style={{ position: 'relative', zIndex: 10 }}>
-          <TrustBar />
         </div>
       </section>
 
@@ -103,6 +99,9 @@ export default function HomePage() {
           </AnimateIn>
         </div>
       </section>
+
+      {/* ── Trust bar: separator between documentary and topics ── */}
+      <TrustBar />
 
       {/* ── Topics ── */}
       <section style={{ padding: '6rem 2rem' }}>

@@ -210,7 +210,7 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
 .hero-section {
   position: relative;
   overflow: hidden;
-  background: #111111;
+  background: #0d0d0d;
   margin-top: -72px;
   padding-top: 72px;
   min-height: 100vh;
@@ -231,24 +231,24 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
 .hero-portrait img {
   height: 100%;
   width: auto;
-  max-width: 60%;
+  max-width: 70%;
   object-fit: contain;
   object-position: bottom right;
 }
 
-/* Gradient fades dark from left (text area) and bottom (anchor) */
+/* Left gradient for text legibility; bottom is subtle — blends into documentary section */
 .hero-gradient {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to right, #111111 28%, rgba(17,17,17,0.65) 52%, rgba(17,17,17,0.05) 75%),
-    linear-gradient(to top,   #111111 0%,  transparent 22%);
+    linear-gradient(to right, rgba(13,13,13,0.97) 26%, rgba(13,13,13,0.62) 50%, rgba(13,13,13,0.04) 72%),
+    linear-gradient(to top,   #0d0d0d 0%, rgba(13,13,13,0.6) 9%, transparent 20%);
 }
 
 .hero-content {
   position: relative;
   z-index: 10;
-  padding: 3rem 2rem 2.5rem;
+  padding: 3rem 2rem 3rem;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
@@ -304,21 +304,21 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
     justify-content: center !important;
   }
 
-  /* Image: contained at 82% width — full portrait visible, slight side margins */
+  /* Image: 90% width so portrait is prominent and full body is visible */
   .hero-portrait img {
     position: static !important;
     inset: auto !important;
-    width: 82% !important;
+    width: 90% !important;
     height: auto !important;
-    max-width: 82% !important;
+    max-width: 90% !important;
     max-height: none !important;
     object-fit: contain !important;
     object-position: top center !important;
   }
 
-  /* Gradient: solid dark only at the bottom for text readability */
+  /* Mobile gradient: much less aggressive so legs show; fades to match documentary */
   .hero-gradient {
-    background: linear-gradient(to top, #111111 0%, #111111 30%, transparent 58%);
+    background: linear-gradient(to top, #0d0d0d 0%, rgba(13,13,13,0.75) 16%, transparent 40%);
   }
 
   .hero-headline {
