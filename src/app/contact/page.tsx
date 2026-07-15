@@ -1,200 +1,66 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import AnimateIn from '@/components/AnimateIn'
 import EnquiryForm from '@/components/EnquiryForm'
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description:
-    'Get in touch with Elliot Castro — speaking, consultancy, media, and general enquiries.',
+  description: 'Speaking, consultancy, media, and general enquiries for Elliot Castro.',
 }
-
-const enquiryTypes = [
-  {
-    type: 'keynote' as const,
-    label: 'Keynote Speaking',
-    desc: 'Book Elliot for a conference, corporate event, or public forum.',
-    href: '/keynote',
-  },
-  {
-    type: 'consultancy' as const,
-    label: 'Consultancy',
-    desc: 'Fraud risk advisory, training, or incident support for your organisation.',
-    href: '/consultancy',
-  },
-  {
-    type: 'media' as const,
-    label: 'Media',
-    desc: 'Expert commentary for broadcast, print, or digital. Short deadlines welcome.',
-    href: '/media',
-  },
-]
 
 export default function ContactPage() {
   return (
     <>
-      {/* Header */}
-      <section
-        style={{
-          paddingTop: '10rem',
-          paddingBottom: '4rem',
-          paddingLeft: '2rem',
-          paddingRight: '2rem',
-          borderBottom: '1px solid var(--color-border)',
-        }}
-      >
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <p
-            style={{
-              fontSize: '0.75rem',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: 'var(--color-muted)',
-              marginBottom: '1.25rem',
-            }}
-          >
-            Contact
-          </p>
-          <h1
-            style={{
-              fontFamily: 'var(--font-playfair), Georgia, serif',
-              fontSize: 'clamp(2.25rem, 5vw, 3.75rem)',
-              fontWeight: 700,
-              lineHeight: 1.15,
-              color: 'var(--color-cream)',
-              maxWidth: '700px',
-              marginBottom: '1.5rem',
-            }}
-          >
-            Let&apos;s talk.
-          </h1>
-          <p
-            style={{
-              color: 'var(--color-muted)',
-              fontSize: '1.0625rem',
-              maxWidth: '480px',
-              lineHeight: 1.7,
-            }}
-          >
-            I respond to all serious enquiries personally. Use the forms below or
-            contact me directly at{' '}
-            <a
-              href="mailto:elliot@elliotcastro.com"
-              style={{ color: 'var(--color-cream)', borderBottom: '1px solid var(--color-border)' }}
-            >
-              elliot@elliotcastro.com
-            </a>
-          </p>
-        </div>
-      </section>
-
-      {/* Enquiry type shortcuts */}
-      <section style={{ padding: '5rem 2rem', borderBottom: '1px solid var(--color-border)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <p
-            style={{
-              fontSize: '0.75rem',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: 'var(--color-muted)',
-              marginBottom: '2.5rem',
-            }}
-          >
-            What can I help with?
-          </p>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: '0',
-            }}
-          >
-            {enquiryTypes.map((item, i) => (
-              <Link
-                key={item.type}
-                href={item.href}
-                style={{
-                  display: 'block',
-                  padding: '2.5rem',
-                  borderLeft: i === 0 ? '1px solid var(--color-border)' : undefined,
-                  borderRight: '1px solid var(--color-border)',
-                  borderTop: '1px solid var(--color-border)',
-                  borderBottom: '1px solid var(--color-border)',
-                  transition: 'background 0.2s',
-                }}
-              >
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-playfair), Georgia, serif',
-                    fontSize: '1.125rem',
-                    color: 'var(--color-cream)',
-                    marginBottom: '0.5rem',
-                  }}
-                >
-                  {item.label}
-                </h3>
-                <p style={{ color: 'var(--color-muted)', fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                  {item.desc}
-                </p>
-                <p
-                  style={{
-                    fontSize: '0.8125rem',
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: 'var(--color-oxblood)',
-                  }}
-                >
-                  Go to {item.label.toLowerCase()} &rarr;
-                </p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* General form */}
-      <section style={{ padding: '5rem 2rem' }}>
-        <div
-          style={{
-            maxWidth: '1200px',
-            margin: '0 auto',
-            display: 'grid',
-            gridTemplateColumns: '1fr 2fr',
-            gap: '6rem',
-            alignItems: 'start',
-          }}
-        >
-          <div>
-            <h2
-              style={{
-                fontFamily: 'var(--font-playfair), Georgia, serif',
-                fontSize: '1.75rem',
-                color: 'var(--color-cream)',
-                marginBottom: '1rem',
-                lineHeight: 1.3,
-              }}
-            >
-              General enquiry
-            </h2>
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.9375rem', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Not sure which category fits? Use this form and I&apos;ll make sure it reaches the right place.
-            </p>
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.875rem', lineHeight: 1.6 }}>
-              Or email directly:
-              <br />
-              <a
-                href="mailto:elliot@elliotcastro.com"
-                style={{
-                  color: 'var(--color-cream)',
-                  display: 'block',
-                  marginTop: '0.25rem',
-                }}
-              >
+      {/* ── Header ── */}
+      <section style={{ padding: '5rem 2rem 4rem', background: 'var(--color-navy)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="container">
+          <AnimateIn>
+            <p className="section-label" style={{ color: 'rgba(255,255,255,0.6)' }}>Get in touch</p>
+            <h1 style={{ color: '#fff', fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', maxWidth: 600, lineHeight: 1.12, marginBottom: '1.25rem' }}>
+              Let's talk.
+            </h1>
+            <p style={{ color: 'rgba(255,255,255,0.7)', maxWidth: 480, lineHeight: 1.8 }}>
+              Elliot responds to all serious enquiries personally. Use the form below or email{' '}
+              <a href="mailto:elliot@elliotcastro.com" style={{ color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.4)' }}>
                 elliot@elliotcastro.com
               </a>
             </p>
-          </div>
-          <EnquiryForm type="general" />
+          </AnimateIn>
+        </div>
+      </section>
+
+      {/* ── Form + sidebar ── */}
+      <section style={{ padding: '6rem 2rem' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '6rem', alignItems: 'start' }}>
+
+          {/* Sidebar */}
+          <AnimateIn>
+            <h2 style={{ fontSize: '1.375rem', marginBottom: '1rem', lineHeight: 1.3 }}>What can Elliot help with?</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              {[
+                { title: 'Keynote Speaking', desc: 'Book Elliot for conferences, corporate events, or private briefings. Talks tailored to your audience and sector.' },
+                { title: 'Consultancy', desc: 'Fraud risk advisory, employee training, policy review, and incident response support.' },
+                { title: 'Media', desc: 'Expert commentary for broadcast, print, and digital. Short deadlines welcome.' },
+                { title: 'Workshop & Training', desc: 'Half-day or full-day sessions for teams, delivered in-person or virtually.' },
+              ].map(item => (
+                <div key={item.title} style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.25rem' }}>
+                  <p style={{ fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.375rem', fontSize: '0.9375rem' }}>{item.title}</p>
+                  <p style={{ color: 'var(--color-mid-grey)', fontSize: '0.875rem', lineHeight: 1.7 }}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: 'var(--color-off-white)', border: '1px solid var(--color-border)' }}>
+              <p style={{ fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-mid-grey)', marginBottom: '0.5rem' }}>Direct email</p>
+              <a href="mailto:elliot@elliotcastro.com" style={{ color: 'var(--color-navy)', fontWeight: 600, fontSize: '0.9375rem' }}>
+                elliot@elliotcastro.com
+              </a>
+            </div>
+          </AnimateIn>
+
+          {/* Form */}
+          <AnimateIn delay={120}>
+            <EnquiryForm defaultType="keynote" />
+          </AnimateIn>
         </div>
       </section>
     </>

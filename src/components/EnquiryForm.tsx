@@ -1,218 +1,148 @@
 'use client'
+import { useState, useRef, FormEvent } from 'react'
 
-import { useState, useRef } from 'react'
-
-type FormType = 'keynote' | 'consultancy' | 'media' | 'general'
-
-interface Field {
-  name: string
-  label: string
-  type: 'text' | 'email' | 'tel' | 'textarea' | 'select'
-  required?: boolean
-  options?: string[]
-  placeholder?: string
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  padding: '0.875rem 1rem',
+  border: '1px solid var(--color-border)',
+  background: '#fff',
+  fontSize: '0.9375rem',
+  color: 'var(--color-text)',
+  outline: 'none',
+  transition: 'border-color 0.2s',
+  fontFamily: 'inherit',
 }
 
-const fieldsByType: Record<FormType, Field[]> = {
-  keynote: [
-    { name: 'name', label: 'Your name', type: 'text', required: true },
-    { name: 'organisation', label: 'Organisation', type: 'text', required: true },
-    { name: 'email', label: 'Email address', type: 'email', required: true },
-    { name: 'phone', label: 'Phone number', type: 'tel' },
-    { name: 'event_date', label: 'Event date / timeframe', type: 'text', placeholder: 'e.g. March 2026 or flexible' },
-    { name: 'audience_size', label: 'Estimated audience size', type: 'select', options: ['Under 50', '50–150', '150–500', '500–1000', '1000+', 'Not yet confirmed'] },
-    { name: 'budget', label: 'Budget range', type: 'select', options: ['Under £5k', '£5k–£10k', '£10k–£20k', '£20k+', 'To be discussed'] },
-    { name: 'message', label: 'Tell me about the event and what you\'re looking for', type: 'textarea', required: true },
-  ],
-  consultancy: [
-    { name: 'name', label: 'Your name', type: 'text', required: true },
-    { name: 'organisation', label: 'Organisation', type: 'text', required: true },
-    { name: 'email', label: 'Email address', type: 'email', required: true },
-    { name: 'phone', label: 'Phone number', type: 'tel' },
-    { name: 'engagement_type', label: 'Type of engagement', type: 'select', options: ['Fraud risk assessment', 'Training & awareness', 'Incident response', 'Policy & process review', 'Expert advisory', 'Other'] },
-    { name: 'message', label: 'Describe the challenge or project', type: 'textarea', required: true },
-  ],
-  media: [
-    { name: 'name', label: 'Your name', type: 'text', required: true },
-    { name: 'outlet', label: 'Publication / outlet', type: 'text', required: true },
-    { name: 'email', label: 'Email address', type: 'email', required: true },
-    { name: 'deadline', label: 'Deadline', type: 'text', placeholder: 'e.g. tomorrow 5pm, or flexible' },
-    { name: 'message', label: 'What are you working on? What would you like to discuss?', type: 'textarea', required: true },
-  ],
-  general: [
-    { name: 'name', label: 'Your name', type: 'text', required: true },
-    { name: 'email', label: 'Email address', type: 'email', required: true },
-    { name: 'subject', label: 'Subject', type: 'text' },
-    { name: 'message', label: 'Message', type: 'textarea', required: true },
-  ],
+const labelStyle: React.CSSProperties = {
+  display: 'block',
+  fontSize: '0.8125rem',
+  fontWeight: 600,
+  color: 'var(--color-navy)',
+  marginBottom: '0.5rem',
 }
 
-interface Props {
-  type: FormType
-}
+const fields = [
+  { name: 'name', label: 'Full name', type: 'text' as const, required: true, placeholder: 'Your name' },
+  { name: 'email', label: 'Email address', type: 'email' as const, required: true, placeholder: 'you@example.com' },
+  { name: 'phone', label: 'Phone number (optional)', type: 'tel' as const, placeholder: '+44 7000 000000' },
+  { name: 'organisation', label: 'Organisation', type: 'text' as const, placeholder: 'Company or event name' },
+]
 
-export default function EnquiryForm({ type }: Props) {
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [error, setError] = useState('')
+export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?: string }) {
+  const [formData, setFormData] = useState<Record<string, string>>({
+    name: '', email: '', phone: '', organisation: '', type: defaultType, eventDate: '', message: '',
+  })
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
   const honeypotRef = useRef<HTMLInputElement>(null)
 
-  const fields = fieldsByType[type]
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function focusBorder(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    e.target.style.borderColor = 'var(--color-navy)'
+  }
+  function blurBorder(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    e.target.style.borderColor = 'var(--color-border)'
+  }
+
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-
     if (honeypotRef.current?.value) return
-
-    setStatus('loading')
-    setError('')
-
-    const form = e.currentTarget
-    const data: Record<string, string> = { type }
-    fields.forEach((f) => {
-      const el = form.elements.namedItem(f.name) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null
-      if (el) data[f.name] = el.value
-    })
-
+    setStatus('submitting')
+    setErrorMsg('')
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('/api/enquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       })
-      if (!res.ok) throw new Error('Request failed')
+      if (!res.ok) {
+        const body = await res.text()
+        throw new Error(body || 'Request failed')
+      }
       setStatus('success')
-      form.reset()
-    } catch {
+    } catch (err) {
       setStatus('error')
-      setError('Something went wrong. Please try emailing directly.')
+      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     }
-  }
-
-  const inputStyle: React.CSSProperties = {
-    width: '100%',
-    background: 'var(--color-ink-soft)',
-    border: '1px solid var(--color-border)',
-    borderRadius: '2px',
-    padding: '0.875rem 1rem',
-    color: 'var(--color-cream)',
-    fontSize: '0.9375rem',
-    outline: 'none',
-    transition: 'border-color 0.2s',
-  }
-
-  const labelStyle: React.CSSProperties = {
-    display: 'block',
-    fontSize: '0.75rem',
-    letterSpacing: '0.08em',
-    textTransform: 'uppercase',
-    color: 'var(--color-muted)',
-    marginBottom: '0.5rem',
   }
 
   if (status === 'success') {
     return (
-      <div
-        style={{
-          padding: '3rem',
-          border: '1px solid var(--color-border)',
-          textAlign: 'center',
-        }}
-      >
-        <p
-          style={{
-            fontFamily: 'var(--font-playfair), Georgia, serif',
-            fontSize: '1.25rem',
-            color: 'var(--color-cream)',
-            marginBottom: '0.75rem',
-          }}
-        >
-          Enquiry received.
-        </p>
-        <p style={{ color: 'var(--color-muted)', fontSize: '0.9375rem' }}>
-          Thank you — I&apos;ll be in touch shortly.
-        </p>
+      <div style={{ padding: '3rem', background: 'var(--color-off-white)', border: '1px solid var(--color-border)', textAlign: 'center' }}>
+        <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'var(--color-green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem', fontSize: '1.125rem', fontWeight: 700 }}>✓</div>
+        <h3 style={{ marginBottom: '0.5rem' }}>Enquiry received</h3>
+        <p style={{ color: 'var(--color-mid-grey)', fontSize: '0.9375rem' }}>Thank you — Elliot or his team will be in touch within 2 working days.</p>
       </div>
     )
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {/* Honeypot */}
-      <input
-        ref={honeypotRef}
-        type="text"
-        name="website"
-        tabIndex={-1}
-        aria-hidden="true"
-        style={{ position: 'absolute', left: '-9999px' }}
-      />
+      {/* Honeypot — hidden from real users */}
+      <input ref={honeypotRef} type="text" name="website" tabIndex={-1} aria-hidden="true" style={{ position: 'absolute', left: '-9999px' }} />
 
-      {fields.map((field) => (
-        <div key={field.name}>
-          <label htmlFor={field.name} style={labelStyle}>
-            {field.label}
-            {field.required && <span style={{ color: 'var(--color-oxblood)', marginLeft: '4px' }}>*</span>}
+      {fields.map(f => (
+        <div key={f.name}>
+          <label htmlFor={f.name} style={labelStyle}>
+            {f.label}{f.required && <span style={{ color: 'var(--color-green)', marginLeft: 2 }}>*</span>}
           </label>
-
-          {field.type === 'textarea' ? (
-            <textarea
-              id={field.name}
-              name={field.name}
-              required={field.required}
-              rows={5}
-              placeholder={field.placeholder}
-              style={{ ...inputStyle, resize: 'vertical' }}
-            />
-          ) : field.type === 'select' ? (
-            <select
-              id={field.name}
-              name={field.name}
-              required={field.required}
-              style={{ ...inputStyle, cursor: 'pointer' }}
-            >
-              <option value="">Select an option</option>
-              {field.options?.map((o) => (
-                <option key={o} value={o}>
-                  {o}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input
-              id={field.name}
-              name={field.name}
-              type={field.type}
-              required={field.required}
-              placeholder={field.placeholder}
-              style={inputStyle}
-            />
-          )}
+          <input
+            id={f.name} name={f.name} type={f.type}
+            required={f.required} placeholder={f.placeholder}
+            value={formData[f.name]} onChange={handleChange}
+            onFocus={focusBorder} onBlur={blurBorder}
+            style={inputStyle}
+          />
         </div>
       ))}
 
-      {error && (
-        <p style={{ fontSize: '0.875rem', color: 'var(--color-oxblood-light)' }}>{error}</p>
+      <div>
+        <label htmlFor="type" style={labelStyle}>Enquiry type<span style={{ color: 'var(--color-green)', marginLeft: 2 }}>*</span></label>
+        <select id="type" name="type" value={formData.type} onChange={handleChange} required
+          onFocus={focusBorder} onBlur={blurBorder}
+          style={{ ...inputStyle, cursor: 'pointer', appearance: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center' }}
+        >
+          <option value="keynote">Keynote speaking</option>
+          <option value="consultancy">Consultancy</option>
+          <option value="media">Media / press</option>
+          <option value="workshop">Workshop / training</option>
+          <option value="general">General enquiry</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="eventDate" style={labelStyle}>Event date (optional)</label>
+        <input id="eventDate" name="eventDate" type="date" value={formData.eventDate} onChange={handleChange}
+          onFocus={focusBorder} onBlur={blurBorder} style={inputStyle} />
+      </div>
+
+      <div>
+        <label htmlFor="message" style={labelStyle}>Message<span style={{ color: 'var(--color-green)', marginLeft: 2 }}>*</span></label>
+        <textarea id="message" name="message" required rows={5}
+          placeholder="Tell Elliot about your event, audience, and what you're hoping to achieve."
+          value={formData.message} onChange={handleChange}
+          onFocus={focusBorder} onBlur={blurBorder}
+          style={{ ...inputStyle, resize: 'vertical' }}
+        />
+      </div>
+
+      {status === 'error' && (
+        <p style={{ color: '#C0392B', fontSize: '0.875rem', padding: '0.75rem 1rem', background: '#FEF2F2', border: '1px solid #FCA5A5' }}>
+          {errorMsg || 'Something went wrong. Please try again or email elliot@elliotcastro.com directly.'}
+        </p>
       )}
 
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        style={{
-          background: 'var(--color-oxblood)',
-          color: 'var(--color-cream)',
-          border: 'none',
-          padding: '1rem 2.5rem',
-          fontSize: '0.8125rem',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          cursor: status === 'loading' ? 'wait' : 'pointer',
-          opacity: status === 'loading' ? 0.7 : 1,
-          transition: 'opacity 0.2s, background 0.2s',
-          alignSelf: 'flex-start',
-        }}
-      >
-        {status === 'loading' ? 'Sending…' : 'Send enquiry'}
+      <button type="submit" disabled={status === 'submitting'} className="btn-primary"
+        style={{ alignSelf: 'flex-start', opacity: status === 'submitting' ? 0.65 : 1, cursor: status === 'submitting' ? 'not-allowed' : 'pointer' }}>
+        {status === 'submitting' ? 'Sending…' : 'Send enquiry'}
       </button>
+
+      <p style={{ fontSize: '0.8125rem', color: 'var(--color-mid-grey)' }}>
+        By submitting this form you agree to our <a href="/privacy-policy" style={{ color: 'var(--color-navy)', textDecoration: 'underline' }}>privacy policy</a>. Your details will only be used to respond to your enquiry.
+      </p>
     </form>
   )
 }

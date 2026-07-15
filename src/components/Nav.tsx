@@ -1,139 +1,148 @@
 'use client'
-
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown } from 'lucide-react'
 
-const links = [
+const keynoteTopics = [
+  { label: 'Fraud Prevention', href: '/keynotes#fraud-prevention' },
+  { label: 'Cybersecurity Awareness', href: '/keynotes#cybersecurity' },
+  { label: 'Identity Theft', href: '/keynotes#identity-theft' },
+  { label: 'Social Engineering', href: '/keynotes#social-engineering' },
+  { label: 'Psychology of Criminals', href: '/keynotes#psychology' },
+  { label: 'Insider Threats', href: '/keynotes#insider-threats' },
+  { label: 'Risk Management', href: '/keynotes#risk-management' },
+  { label: 'Ethics & Transformation', href: '/keynotes#ethics' },
+]
+
+const navLinks = [
   { href: '/about', label: 'About' },
-  { href: '/keynote', label: 'Speaking' },
-  { href: '/consultancy', label: 'Consultancy' },
-  { href: '/media', label: 'Media' },
-  { href: '/insights', label: 'Insights' },
+  { href: '/keynotes', label: 'Keynotes', dropdown: true },
   { href: '/contact', label: 'Contact' },
 ]
 
 export default function Nav() {
   const pathname = usePathname()
-  const [open, setOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40)
+    const handler = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
+  useEffect(() => { setMobileOpen(false); setDropdownOpen(false) }, [pathname])
+
   useEffect(() => {
-    setOpen(false)
-  }, [pathname])
+    function handleClick(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
 
   return (
-    <header
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        transition: 'background 0.3s, border-color 0.3s',
-        background: scrolled ? 'rgba(12,11,11,0.96)' : 'transparent',
-        borderBottom: scrolled ? '1px solid #2A2826' : '1px solid transparent',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '0 2rem',
-          height: '72px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Link
-          href="/"
-          style={{
-            fontFamily: 'var(--font-playfair), Georgia, serif',
-            fontSize: '1.125rem',
-            fontWeight: 700,
-            letterSpacing: '0.02em',
-            color: 'var(--color-cream)',
-          }}
-        >
+    <header style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+      background: scrolled ? 'rgba(255,255,255,0.97)' : '#fff',
+      borderBottom: `1px solid ${scrolled ? '#DDE2EC' : '#DDE2EC'}`,
+      boxShadow: scrolled ? '0 1px 12px rgba(15,32,64,0.08)' : 'none',
+      transition: 'box-shadow 0.3s',
+    }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 2rem', height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+
+        {/* Logo */}
+        <Link href="/" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontSize: '1.125rem', fontWeight: 700, color: 'var(--color-navy)', letterSpacing: '0.01em' }}>
           Elliot Castro
         </Link>
 
-        <nav
-          style={{
-            display: 'flex',
-            gap: '2.5rem',
-            alignItems: 'center',
-          }}
-          className="hidden md:flex"
-        >
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              style={{
-                fontSize: '0.8125rem',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: pathname === l.href ? 'var(--color-cream)' : 'var(--color-muted)',
-                transition: 'color 0.2s',
-                fontWeight: pathname === l.href ? 500 : 400,
-              }}
-            >
-              {l.label}
-            </Link>
-          ))}
+        {/* Desktop nav */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }} className="hide-mobile">
+          {navLinks.map((link) =>
+            link.dropdown ? (
+              <div key={link.href} ref={dropdownRef} style={{ position: 'relative' }}>
+                <button
+                  onClick={() => setDropdownOpen(o => !o)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '0.25rem',
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    fontSize: '0.875rem', fontWeight: isActive(link.href) ? 600 : 400,
+                    color: isActive(link.href) ? 'var(--color-navy)' : 'var(--color-mid-grey)',
+                    transition: 'color 0.2s',
+                  }}
+                >
+                  {link.label}
+                  <ChevronDown size={14} style={{ transform: dropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                </button>
+
+                {dropdownOpen && (
+                  <div style={{
+                    position: 'absolute', top: 'calc(100% + 12px)', left: '50%', transform: 'translateX(-50%)',
+                    background: '#fff', border: '1px solid var(--color-border)',
+                    boxShadow: '0 8px 24px rgba(15,32,64,0.12)', minWidth: 240, zIndex: 200,
+                    padding: '0.5rem 0',
+                  }}>
+                    <Link href="/keynotes" style={{ display: 'block', padding: '0.625rem 1.25rem', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-navy)', borderBottom: '1px solid var(--color-border)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                      All keynotes
+                    </Link>
+                    {keynoteTopics.map(t => (
+                      <Link key={t.href} href={t.href} style={{ display: 'block', padding: '0.5rem 1.25rem', fontSize: '0.875rem', color: 'var(--color-mid-grey)', transition: 'color 0.15s, background 0.15s' }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-navy)'; (e.currentTarget as HTMLElement).style.background = 'var(--color-off-white)' }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-mid-grey)'; (e.currentTarget as HTMLElement).style.background = '' }}
+                      >
+                        {t.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link key={link.href} href={link.href} style={{ fontSize: '0.875rem', fontWeight: isActive(link.href) ? 600 : 400, color: isActive(link.href) ? 'var(--color-navy)' : 'var(--color-mid-grey)', transition: 'color 0.2s' }}>
+                {link.label}
+              </Link>
+            )
+          )}
+          <Link href="/contact" className="btn-primary" style={{ padding: '0.625rem 1.5rem', fontSize: '0.8125rem' }}>
+            Book Elliot
+          </Link>
         </nav>
 
+        {/* Mobile hamburger */}
         <button
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => setMobileOpen(o => !o)}
           aria-label="Toggle menu"
-          style={{
-            display: 'none',
-            background: 'none',
-            border: 'none',
-            color: 'var(--color-cream)',
-            cursor: 'pointer',
-            padding: '0.25rem',
-          }}
-          className="md:hidden"
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-navy)', display: 'none' }}
+          className="md:block"
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {open && (
-        <div
-          style={{
-            background: 'var(--color-ink)',
-            borderTop: '1px solid var(--color-border)',
-            padding: '1.5rem 2rem 2rem',
-          }}
-        >
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              style={{
-                display: 'block',
-                padding: '0.75rem 0',
-                fontSize: '0.875rem',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: pathname === l.href ? 'var(--color-cream)' : 'var(--color-muted)',
-                borderBottom: '1px solid var(--color-border)',
-              }}
-            >
-              {l.label}
-            </Link>
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div style={{ background: '#fff', borderTop: '1px solid var(--color-border)', padding: '1rem 1.25rem 2rem' }}>
+          {navLinks.map(link => (
+            <div key={link.href}>
+              <Link href={link.href} style={{ display: 'block', padding: '0.875rem 0', fontSize: '1rem', fontWeight: 600, color: 'var(--color-navy)', borderBottom: '1px solid var(--color-border)' }}>
+                {link.label}
+              </Link>
+              {link.dropdown && keynoteTopics.map(t => (
+                <Link key={t.href} href={t.href} style={{ display: 'block', padding: '0.625rem 0 0.625rem 1rem', fontSize: '0.875rem', color: 'var(--color-mid-grey)', borderBottom: '1px solid var(--color-border)' }}>
+                  {t.label}
+                </Link>
+              ))}
+            </div>
           ))}
+          <Link href="/contact" className="btn-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.25rem' }}>
+            Book Elliot
+          </Link>
         </div>
       )}
     </header>
