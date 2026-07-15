@@ -232,21 +232,20 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   /* Container */
   .container { padding: 0 1.25rem; }
 
-  /* Hero mobile — fill the upper hero with Elliot's portrait */
-  .hero-portrait {
-    align-items: center;
-    justify-content: center;
-  }
-
+  /* Hero mobile: cover the full hero, face at top-centre */
   .hero-portrait img {
-    height: 72vh;
-    width: auto;
-    max-width: none;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: top center !important;
   }
 
-  /* Gradient only covers the bottom text strip — top is clear */
+  /* Gradient only darkens the bottom strip for text — top stays clear */
   .hero-gradient {
-    background: linear-gradient(to top, #111111 0%, #111111 28%, transparent 50%);
+    background: linear-gradient(to top, #111111 0%, #111111 30%, transparent 58%);
   }
 
   .hero-headline {
