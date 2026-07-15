@@ -232,23 +232,21 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   /* Container */
   .container { padding: 0 1.25rem; }
 
-  /* Hero mobile — portrait centred vertically so face shows above text */
+  /* Hero mobile — fill the upper hero with Elliot's portrait */
   .hero-portrait {
     align-items: center;
     justify-content: center;
   }
 
   .hero-portrait img {
-    height: auto;
-    width: 80%;
-    max-width: 80%;
-    object-position: center top;
+    height: 72vh;
+    width: auto;
+    max-width: none;
   }
 
-  /* Stronger bottom-up gradient covers the text area; top stays clear for Elliot */
+  /* Gradient only covers the bottom text strip — top is clear */
   .hero-gradient {
-    background:
-      linear-gradient(to top, #111111 0%, #111111 38%, rgba(17,17,17,0.7) 58%, transparent 80%);
+    background: linear-gradient(to top, #111111 0%, #111111 28%, transparent 50%);
   }
 
   .hero-headline {
