@@ -31,16 +31,6 @@ export default function HomePage() {
     <>
       {/* ── Hero ── */}
       <section className="hero-section">
-        <div className="hero-portrait" aria-hidden="true">
-          <Image
-            src="/hero-lander.png"
-            alt=""
-            width={1144}
-            height={1376}
-            priority
-            style={{ height: '100%', width: 'auto', maxWidth: '70%', objectFit: 'contain', objectPosition: 'bottom right' }}
-          />
-        </div>
         <div className="hero-gradient" aria-hidden="true" />
         <div className="hero-content">
           <p className="hero-overline">Elliot Castro</p>
@@ -76,6 +66,7 @@ export default function HomePage() {
           </AnimateIn>
 
           <AnimateIn delay={140}>
+            {/* TODO: replace href value below with the real YouTube URL from Elliot */}
             <a
               href="#"
               target="_blank"
@@ -84,6 +75,13 @@ export default function HomePage() {
               aria-label="Watch the documentary on YouTube"
             >
               <div className="doc-thumb">
+                <Image
+                  src="/doc-thumb.jpg"
+                  alt="Elliot Castro documentary"
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                  unoptimized
+                />
                 <div className="doc-play-btn">
                   <svg viewBox="0 0 24 24" fill="currentColor" width={26} height={26} style={{ marginLeft: 4 }}>
                     <path d="M8 5v14l11-7z" />
