@@ -105,6 +105,20 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   padding: 0 2rem;
 }
 
+/* ── Trust bar marquee ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.trust-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 8s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .trust-track { animation: none; }
+}
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .container { padding: 0 1.25rem; }

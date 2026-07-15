@@ -15,7 +15,7 @@ const keynoteThemes = [
   { title: 'Criminal Psychology', desc: 'Why intelligent people commit fraud, and the mindset behind organised financial crime.', href: '/keynotes#psychology' },
 ]
 
-const mediaSources = ['BBC', 'Sky News', 'The Times', 'Channel 4', 'The Guardian', '[Media — TBC]']
+const mediaSources = ['BBC', 'Monzo', 'Experian']
 
 const testimonials = [
   { quote: '[Testimonial quote — TBC]', author: '[Name, Title]', org: '[Organisation]' },
@@ -59,12 +59,19 @@ export default function HomePage() {
       </section>
 
       {/* ── Trust bar ── */}
-      <section style={{ borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', padding: '1.75rem 2rem', background: 'var(--color-off-white)' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <p style={{ fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-mid-grey)', fontWeight: 600, flexShrink: 0 }}>As seen on</p>
-          {mediaSources.map(src => (
-            <span key={src} style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-mid-grey)', letterSpacing: '0.05em', opacity: 0.7 }}>{src}</span>
-          ))}
+      <section style={{ borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', padding: '1.25rem 0', background: 'var(--color-off-white)', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0' }}>
+          {/* "As seen on" label — fixed left */}
+          <p style={{ fontSize: '0.6875rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-mid-grey)', fontWeight: 600, flexShrink: 0, padding: '0 2rem 0 2rem', borderRight: '1px solid var(--color-border)', marginRight: '3rem' }}>As seen on</p>
+
+          {/* Scrolling track — two copies for seamless loop */}
+          <div style={{ overflow: 'hidden', flex: 1 }}>
+            <div className="trust-track">
+              {[...mediaSources, ...mediaSources].map((src, i) => (
+                <span key={i} style={{ fontSize: '1.0625rem', fontWeight: 700, color: 'var(--color-navy)', letterSpacing: '0.06em', padding: '0 3rem', flexShrink: 0 }}>{src}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
