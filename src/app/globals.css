@@ -213,7 +213,8 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   background: #111111;
   margin-top: -72px;
   padding-top: 72px;
-  padding-bottom: 8rem;
+  /* padding-bottom creates space between flex text content and the absolute trust bar */
+  padding-bottom: 7rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -229,30 +230,41 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   pointer-events: none;
 }
 
+/* PNG has alpha — no rectangular background visible */
 .hero-portrait img {
   height: 100%;
   width: auto;
-  max-width: 65%;
+  max-width: 68%;
   object-fit: contain;
   object-position: bottom right;
 }
 
-/* Left gradient for text legibility; bottom blends portrait feet into trust bar */
 .hero-gradient {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to right, #111111 26%, rgba(17,17,17,0.68) 50%, rgba(17,17,17,0.06) 74%),
-    linear-gradient(to top,   #111111 0%, rgba(17,17,17,0.65) 10%, transparent 24%);
+    /* left dark panel — text always legible */
+    linear-gradient(to right, #111111 26%, rgba(17,17,17,0.72) 50%, rgba(17,17,17,0.08) 74%),
+    /* bottom fade — Elliot's body dissolves into the hero floor, no hard cut */
+    linear-gradient(to top, #111111 0%, rgba(17,17,17,0.9) 12%, rgba(17,17,17,0.55) 26%, rgba(17,17,17,0.15) 40%, transparent 54%);
 }
 
 .hero-content {
   position: relative;
   z-index: 10;
-  padding: 3rem 2rem 3rem;
+  padding: 3rem 2rem 2.5rem;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
+}
+
+/* Trust bar pinned to the very bottom of the hero, above the gradient */
+.hero-trust-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
 .hero-overline {
@@ -305,25 +317,26 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
     justify-content: center !important;
   }
 
-  /* Image: full portrait, centred, head below nav */
+  /* Image: alpha PNG, centred, head below nav bar */
   .hero-portrait img {
     position: static !important;
     inset: auto !important;
-    width: 88% !important;
+    width: 86% !important;
     height: auto !important;
-    max-width: 88% !important;
+    max-width: 86% !important;
     max-height: none !important;
     object-fit: contain !important;
     object-position: top center !important;
   }
 
-  /* Mobile gradient: solid dark at bottom for text, transparent above */
+  /* Mobile gradient: heavy bottom fade so text is readable over portrait */
   .hero-gradient {
-    background: linear-gradient(to top, #111111 0%, #111111 28%, transparent 54%) !important;
+    background:
+      linear-gradient(to top, #111111 0%, #111111 24%, rgba(17,17,17,0.75) 44%, transparent 62%) !important;
   }
 
   .hero-section {
-    padding-bottom: 3rem !important;
+    padding-bottom: 5.5rem !important;
   }
 
   .hero-headline {

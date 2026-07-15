@@ -33,14 +33,15 @@ export default function HomePage() {
     <>
       {/* ── Hero ── */}
       <section className="hero-section">
+        {/* Alpha PNG — transparent bg blends seamlessly with #111111 hero */}
         <div className="hero-portrait" aria-hidden="true">
           <Image
-            src="/hero-lander.jpg"
+            src="/hero-lander.png"
             alt=""
-            width={1143}
+            width={1144}
             height={1376}
             priority
-            style={{ height: '100%', width: 'auto', maxWidth: '65%', objectFit: 'contain', objectPosition: 'bottom right' }}
+            style={{ height: '100%', width: 'auto', maxWidth: '68%', objectFit: 'contain', objectPosition: 'bottom right' }}
           />
         </div>
         <div className="hero-gradient" aria-hidden="true" />
@@ -53,10 +54,11 @@ export default function HomePage() {
             Book Elliot
           </Link>
         </div>
+        {/* Trust bar pinned to hero bottom — text and trust bar visible together */}
+        <div className="hero-trust-bar">
+          <TrustBar />
+        </div>
       </section>
-
-      {/* ── Trust bar 1 ── */}
-      <TrustBar />
 
       {/* ── BBC Documentary ── */}
       <section style={{ padding: '5rem 2rem 5.5rem', background: '#0d0d0d' }}>
