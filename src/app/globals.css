@@ -310,29 +310,46 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   /* Container */
   .container { padding: 0 1.25rem; }
 
-  /* Mobile: portrait starts below the fixed 72px nav */
+  /* Mobile: portrait starts below the fixed 72px nav.
+     mask-image fades the div's own pixels to alpha — no paint-over trick,
+     the image itself becomes transparent so it cannot leave a hard edge. */
   .hero-portrait {
     top: 72px !important;
     align-items: flex-start !important;
     justify-content: center !important;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      black        0%,
+      black        50%,   /* head + chest fully opaque */
+      rgba(0,0,0,0.55) 66%,  /* waist starts dissolving */
+      transparent  84%    /* gone well before the div's bottom edge */
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      black        0%,
+      black        50%,
+      rgba(0,0,0,0.55) 66%,
+      transparent  84%
+    );
   }
 
-  /* Image: alpha PNG, centred, head below nav bar */
+  /* Edge-to-edge: 100% eliminates the 7% side margins that created the
+     visible rectangle boundary. The mask above handles the bottom fade. */
   .hero-portrait img {
     position: static !important;
     inset: auto !important;
-    width: 86% !important;
+    width: 100% !important;
     height: auto !important;
-    max-width: 86% !important;
+    max-width: 100% !important;
     max-height: none !important;
     object-fit: contain !important;
     object-position: top center !important;
   }
 
-  /* Mobile gradient: heavy bottom fade so text is readable over portrait */
+  /* Mobile gradient: reinforces bottom dark zone for text legibility */
   .hero-gradient {
     background:
-      linear-gradient(to top, #111111 0%, #111111 24%, rgba(17,17,17,0.75) 44%, transparent 62%) !important;
+      linear-gradient(to top, #111111 0%, #111111 20%, rgba(17,17,17,0.65) 38%, transparent 54%) !important;
   }
 
   .hero-section {
