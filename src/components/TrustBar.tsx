@@ -22,7 +22,7 @@ export default function TrustBar() {
                 alt={logo.alt}
                 width={logo.w}
                 height={logo.h}
-                style={{ height: 36, width: 'auto', objectFit: 'contain', opacity: 0.6 }}
+                style={{ height: 48, width: 'auto', objectFit: 'contain' }}
                 unoptimized
               />
             </span>
