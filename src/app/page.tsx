@@ -33,12 +33,12 @@ export default function HomePage() {
       <section className="hero-section">
         <div className="hero-portrait" aria-hidden="true">
           <Image
-            src="/hero-lander.png"
+            src="/hero-lander.jpg"
             alt=""
-            width={900}
-            height={1100}
+            width={675}
+            height={817}
             priority
-            style={{ height: '100%', width: 'auto', maxWidth: '65%', objectFit: 'contain', objectPosition: 'bottom right' }}
+            style={{ height: '100%', width: 'auto', maxWidth: '60%', objectFit: 'contain', objectPosition: 'bottom right' }}
           />
         </div>
         <div className="hero-gradient" aria-hidden="true" />

@@ -1,18 +1,30 @@
-const logos = ['BBC', 'Monzo', 'Experian']
+import Image from 'next/image'
 
-// 12 items per half × 3 logos cycles = dense enough to cover any viewport
-const HALF = 12
+const logos = [
+  { src: '/logos/bbc.jpg', alt: 'BBC', w: 120, h: 48 },
+  { src: '/logos/experian.jpg', alt: 'Experian', w: 140, h: 48 },
+  { src: '/logos/monzo.jpg', alt: 'Monzo', w: 110, h: 48 },
+]
+
+const HALF = 8
 const half = Array.from({ length: HALF }, (_, i) => logos[i % logos.length])
 const items = [...half, ...half]
 
 export default function TrustBar() {
   return (
-    <div style={{ background: '#0f0f0f', padding: '0.875rem 0' }}>
+    <div style={{ background: '#f5f5f5', borderTop: '1px solid #e5e5e5', borderBottom: '1px solid #e5e5e5', padding: '1.25rem 0' }}>
       <div className="trust-bar-inner">
         <div className="trust-track">
-          {items.map((name, i) => (
-            <span key={i} className="trust-item">
-              {name}
+          {items.map((logo, i) => (
+            <span key={i} style={{ display: 'inline-flex', alignItems: 'center', padding: '0 3rem', flexShrink: 0 }}>
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.w}
+                height={logo.h}
+                style={{ height: 36, width: 'auto', objectFit: 'contain', opacity: 0.6 }}
+                unoptimized
+              />
             </span>
           ))}
         </div>
