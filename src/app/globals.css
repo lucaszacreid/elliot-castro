@@ -210,7 +210,7 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
 .hero-section {
   position: relative;
   overflow: hidden;
-  background: url('/doc-thumb.jpg') center top / cover no-repeat, #0d0d0d;
+  background: #111111;
   margin-top: -72px;
   padding-top: 72px;
   padding-bottom: 8rem;
@@ -220,14 +220,30 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   justify-content: flex-end;
 }
 
+.hero-portrait {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.hero-portrait img {
+  height: 100%;
+  width: auto;
+  max-width: 65%;
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+/* Left gradient for text legibility; bottom blends portrait feet into trust bar */
 .hero-gradient {
   position: absolute;
   inset: 0;
   background:
-    /* left: dark panel so text is always readable */
-    linear-gradient(to right, rgba(0,0,0,0.94) 20%, rgba(0,0,0,0.68) 44%, rgba(0,0,0,0.18) 68%, rgba(0,0,0,0.02) 86%),
-    /* bottom: Elliot fades into darkness, blending into the section below */
-    linear-gradient(to top, #0d0d0d 0%, rgba(13,13,13,0.94) 14%, rgba(13,13,13,0.68) 30%, rgba(13,13,13,0.22) 46%, transparent 60%);
+    linear-gradient(to right, #111111 26%, rgba(17,17,17,0.68) 50%, rgba(17,17,17,0.06) 74%),
+    linear-gradient(to top,   #111111 0%, rgba(17,17,17,0.65) 10%, transparent 24%);
 }
 
 .hero-content {
@@ -282,17 +298,32 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   /* Container */
   .container { padding: 0 1.25rem; }
 
-  /* Mobile: centre on Elliot's face */
-  .hero-section {
-    background-position: 62% top !important;
-    padding-bottom: 3.5rem !important;
+  /* Mobile: portrait starts below the fixed 72px nav */
+  .hero-portrait {
+    top: 72px !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
   }
 
-  /* Mobile gradient: cinematic fade from bottom, lighter sides */
+  /* Image: full portrait, centred, head below nav */
+  .hero-portrait img {
+    position: static !important;
+    inset: auto !important;
+    width: 88% !important;
+    height: auto !important;
+    max-width: 88% !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: top center !important;
+  }
+
+  /* Mobile gradient: solid dark at bottom for text, transparent above */
   .hero-gradient {
-    background:
-      linear-gradient(to top, #0d0d0d 0%, rgba(13,13,13,0.9) 16%, rgba(13,13,13,0.55) 36%, rgba(13,13,13,0.1) 56%, transparent 70%),
-      linear-gradient(to right, rgba(0,0,0,0.45) 0%, transparent 65%) !important;
+    background: linear-gradient(to top, #111111 0%, #111111 28%, transparent 54%) !important;
+  }
+
+  .hero-section {
+    padding-bottom: 3rem !important;
   }
 
   .hero-headline {

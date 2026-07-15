@@ -33,6 +33,16 @@ export default function HomePage() {
     <>
       {/* ── Hero ── */}
       <section className="hero-section">
+        <div className="hero-portrait" aria-hidden="true">
+          <Image
+            src="/hero-lander.jpg"
+            alt=""
+            width={1143}
+            height={1376}
+            priority
+            style={{ height: '100%', width: 'auto', maxWidth: '65%', objectFit: 'contain', objectPosition: 'bottom right' }}
+          />
+        </div>
         <div className="hero-gradient" aria-hidden="true" />
         <div className="hero-content">
           <p className="hero-overline">Elliot Castro</p>
