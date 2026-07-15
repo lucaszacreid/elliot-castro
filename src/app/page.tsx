@@ -26,6 +26,8 @@ const testimonials = [
   { quote: '[Testimonial quote — copy pending from Elliot]', author: '[Name, Title]', org: '[Organisation]' },
 ]
 
+const BBC_DOC_URL = 'https://www.bbc.co.uk/iplayer/episodes/m001zx5p/confessions-of-a-teenage-fraudster'
+
 export default function HomePage() {
   return (
     <>
@@ -43,12 +45,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Documentary ── */}
-      {/* TODO: replace href="#" below with the real YouTube documentary URL from Elliot */}
+      {/* ── Trust bar 1 ── */}
+      <TrustBar />
+
+      {/* ── BBC Documentary ── */}
       <section style={{ padding: '5rem 2rem 5.5rem', background: '#0d0d0d' }}>
         <div className="container">
           <AnimateIn>
-            <p className="section-label" style={{ color: 'rgba(255,255,255,0.38)' }}>Documentary</p>
+            <p className="section-label" style={{ color: 'rgba(255,255,255,0.38)' }}>BBC Documentary</p>
             <h2 style={{
               fontFamily: 'var(--font-playfair), Georgia, serif',
               fontSize: 'clamp(1.875rem, 3.5vw, 2.875rem)',
@@ -66,18 +70,17 @@ export default function HomePage() {
           </AnimateIn>
 
           <AnimateIn delay={140}>
-            {/* TODO: replace href value below with the real YouTube URL from Elliot */}
             <a
-              href="#"
+              href={BBC_DOC_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="doc-link"
-              aria-label="Watch the documentary on YouTube"
+              aria-label="Watch Confessions of a Teenage Fraudster on BBC iPlayer"
             >
               <div className="doc-thumb">
                 <Image
                   src="/doc-thumb.jpg"
-                  alt="Elliot Castro documentary"
+                  alt="Confessions of a Teenage Fraudster — BBC documentary"
                   fill
                   style={{ objectFit: 'cover', objectPosition: 'center top' }}
                   unoptimized
@@ -87,10 +90,10 @@ export default function HomePage() {
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
-                <span className="doc-label-chip">Available on YouTube</span>
+                <span className="doc-label-chip">BBC iPlayer</span>
               </div>
               <div className="doc-footer">
-                <span>Watch now</span>
+                <span>Watch on BBC iPlayer</span>
                 <span>→</span>
               </div>
             </a>
@@ -98,7 +101,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Trust bar: separator between documentary and topics ── */}
+      {/* ── Trust bar 2 ── */}
       <TrustBar />
 
       {/* ── Topics ── */}
@@ -143,16 +146,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Trust bar 2 ── */}
+      {/* ── Trust bar 3 ── */}
       <TrustBar />
 
       {/* ── Elliot in action ── */}
       <InActionGallery />
 
-      {/* ── Trust bar 3 ── */}
+      {/* ── Trust bar 4 ── */}
       <TrustBar />
 
-      {/* ── Case studies / reviews ── */}
+      {/* ── What people say ── */}
       <section style={{ padding: '6rem 2rem', background: 'var(--color-off-white)' }}>
         <div className="container">
           <AnimateIn>
@@ -187,7 +190,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Trust bar 4 ── */}
+      {/* ── Trust bar 5 ── */}
       <TrustBar />
 
       {/* ── Enquiry form ── */}
@@ -206,7 +209,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Trust bar 5 ── */}
+      {/* ── Trust bar 6 ── */}
       <TrustBar />
     </>
   )
