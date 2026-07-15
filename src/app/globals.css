@@ -2,19 +2,19 @@
 
 @theme inline {
   /* Monochrome palette */
-  --color-navy:        #111111;   /* near-black — hero, footer, dark sections */
-  --color-navy-mid:    #1a1a1a;   /* charcoal */
-  --color-navy-light:  #2a2a2a;   /* dark grey */
-  --color-green:       #1a1a1a;   /* buttons / accent = charcoal */
-  --color-green-light: #333333;   /* button hover */
+  --color-navy:        #111111;
+  --color-navy-mid:    #1a1a1a;
+  --color-navy-light:  #2a2a2a;
+  --color-green:       #1a1a1a;
+  --color-green-light: #333333;
 
   /* Neutrals */
   --color-white:       #FFFFFF;
-  --color-off-white:   #fafafa;   /* section backgrounds */
+  --color-off-white:   #fafafa;
   --color-light-grey:  #f0f0f0;
   --color-border:      #e5e5e5;
   --color-mid-grey:    #737373;
-  --color-text:        #1a1a1a;   /* body text — charcoal, not pure black */
+  --color-text:        #1a1a1a;
 
   /* Fonts */
   --font-heading: var(--font-playfair);
@@ -113,21 +113,49 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
+/* Edge fade to hide partial-letter clipping as items enter/exit */
+.trust-bar-inner {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
 .trust-track {
   display: flex;
   width: max-content;
-  animation: marquee 10s linear infinite;
+  animation: marquee 22s linear infinite;
 }
+
+.trust-item {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.14em;
+  padding: 0 3rem;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .trust-track { animation: none; }
 }
+
+/* ── Topics grid (homepage) ── */
+.topics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 4rem;
+}
+
+.topic-card:hover span { transform: translateX(4px); }
 
 /* ── Hero ── */
 .hero-section {
   position: relative;
   overflow: hidden;
   background: #111111;
-  /* extend behind the fixed nav */
   margin-top: -72px;
   padding-top: 72px;
   min-height: 100vh;
@@ -139,7 +167,6 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
 .hero-portrait {
   position: absolute;
   inset: 0;
-  /* portrait sits right-weighted */
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -154,7 +181,6 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   object-position: bottom right;
 }
 
-/* gradient over portrait so left-side text is always readable */
 .hero-gradient {
   position: absolute;
   inset: 0;
@@ -206,17 +232,16 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
 }
 .hero-cta:hover { background: #e5e5e5; }
 
-/* ── Mobile ── */
+/* ── Mobile/responsive ── */
 @media (max-width: 768px) {
+  /* Nav */
+  .hide-mobile { display: none !important; }
+  .show-mobile { display: block !important; }
+
+  /* Container */
   .container { padding: 0 1.25rem; }
 
-  .hide-mobile { display: none !important; }
-
-  .m-stack { flex-direction: column !important; }
-  .m-full  { width: 100% !important; grid-template-columns: 1fr !important; }
-  .m-pad   { padding: 3rem 1.25rem !important; }
-  .m-text-sm { font-size: clamp(1.75rem, 6vw, 2.5rem) !important; }
-
+  /* Hero — more bottom padding so headline clears trust bar */
   .hero-portrait img {
     max-width: 90%;
     opacity: 0.45;
@@ -224,15 +249,48 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
 
   .hero-gradient {
     background:
-      linear-gradient(to top, #111111 35%, rgba(17,17,17,0.85) 60%, rgba(17,17,17,0.3) 85%),
-      linear-gradient(to right, #111111 0%, transparent 60%);
+      linear-gradient(to top, #111111 40%, rgba(17,17,17,0.88) 65%, rgba(17,17,17,0.25) 88%),
+      linear-gradient(to right, #111111 0%, transparent 65%);
   }
 
   .hero-headline {
-    font-size: clamp(2.25rem, 9vw, 3rem);
+    font-size: clamp(2.125rem, 8.5vw, 2.75rem);
+    margin-bottom: 1.75rem;
   }
 
   .hero-content {
-    padding: 2rem 1.25rem 4rem;
+    padding: 2rem 1.25rem 5.5rem;
   }
+
+  /* Topics grid → single column */
+  .topics-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* About page: stack photo above text */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Contact page: stack sidebar above form */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Keynotes page: stack each keynote */
+  .keynote-item-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Keynotes page: unstick the left column */
+  .keynote-sticky { position: static !important; }
+}
+
+/* Desktop-only: show hamburger only on mobile */
+@media (min-width: 769px) {
+  .show-mobile { display: none !important; }
 }

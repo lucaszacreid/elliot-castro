@@ -43,7 +43,7 @@ export default function AboutPage() {
 
       {/* ── Main content ── */}
       <section style={{ padding: '6rem 2rem' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '6rem', alignItems: 'start' }}>
+        <div className="container about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '6rem', alignItems: 'start' }}>
           {/* Sidebar */}
           <AnimateIn>
             <div style={{ position: 'relative', marginBottom: '2rem' }}>

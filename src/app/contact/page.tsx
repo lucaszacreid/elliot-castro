@@ -30,7 +30,7 @@ export default function ContactPage() {
 
       {/* ── Form + sidebar ── */}
       <section style={{ padding: '6rem 2rem' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '6rem', alignItems: 'start' }}>
+        <div className="container contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '6rem', alignItems: 'start' }}>
 
           {/* Sidebar */}
           <AnimateIn>

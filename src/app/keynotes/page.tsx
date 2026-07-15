@@ -131,9 +131,9 @@ export default function KeynotesPage() {
             {keynotes.map((k, i) => (
               <AnimateIn key={k.id} delay={i * 40}>
                 <div id={k.id} style={{ borderBottom: '1px solid var(--color-border)', padding: '4rem 0' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4rem', alignItems: 'start' }}>
+                  <div className="keynote-item-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4rem', alignItems: 'start' }}>
                     {/* Left */}
-                    <div style={{ position: 'sticky', top: '6rem' }}>
+                    <div className="keynote-sticky" style={{ position: 'sticky', top: '6rem' }}>
                       <div style={{ width: 32, height: 3, background: 'var(--color-green)', marginBottom: '1.5rem' }} />
                       <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{k.title}</h2>
                       <p style={{ color: 'var(--color-mid-grey)', fontSize: '0.9375rem', fontStyle: 'italic', marginBottom: '1.5rem' }}>{k.subtitle}</p>

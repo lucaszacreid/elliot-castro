@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/keynotes#insider-threats', priority: 0.7 },
     { path: '/keynotes#risk-management', priority: 0.7 },
     { path: '/keynotes#ethics', priority: 0.7 },
+    { path: '/case-studies', priority: 0.8 },
     { path: '/contact', priority: 0.85 },
     { path: '/privacy-policy', priority: 0.3 },
     { path: '/terms', priority: 0.3 },

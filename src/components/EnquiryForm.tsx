@@ -71,10 +71,17 @@ export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?:
 
   if (status === 'success') {
     return (
-      <div style={{ padding: '3rem', background: 'var(--color-off-white)', border: '1px solid var(--color-border)', textAlign: 'center' }}>
-        <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'var(--color-green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem', fontSize: '1.125rem', fontWeight: 700 }}>✓</div>
-        <h3 style={{ marginBottom: '0.5rem' }}>Enquiry received</h3>
-        <p style={{ color: 'var(--color-mid-grey)', fontSize: '0.9375rem' }}>Thank you — Elliot or his team will be in touch within 2 working days.</p>
+      <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+        <div style={{
+          width: 56, height: 56, borderRadius: '50%',
+          background: 'var(--color-navy)', color: '#fff',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          margin: '0 auto 2rem', fontSize: '1.375rem',
+        }}>✓</div>
+        <h3 style={{ fontSize: 'clamp(1.375rem, 3vw, 1.875rem)', marginBottom: '0.875rem' }}>Thank you</h3>
+        <p style={{ color: 'var(--color-mid-grey)', fontSize: '1rem', lineHeight: 1.75, maxWidth: 380, margin: '0 auto' }}>
+          Elliot will be in touch soon. He responds to all serious enquiries personally.
+        </p>
       </div>
     )
   }

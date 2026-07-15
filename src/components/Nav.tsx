@@ -4,12 +4,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown } from 'lucide-react'
 
-const keynoteTopics = [
+const topicLinks = [
   { label: 'Fraud Prevention', href: '/keynotes#fraud-prevention' },
   { label: 'Cybersecurity Awareness', href: '/keynotes#cybersecurity' },
   { label: 'Identity Theft', href: '/keynotes#identity-theft' },
   { label: 'Social Engineering', href: '/keynotes#social-engineering' },
-  { label: 'Psychology of Criminals', href: '/keynotes#psychology' },
+  { label: 'Criminal Psychology', href: '/keynotes#psychology' },
   { label: 'Insider Threats', href: '/keynotes#insider-threats' },
   { label: 'Risk Management', href: '/keynotes#risk-management' },
   { label: 'Ethics & Transformation', href: '/keynotes#ethics' },
@@ -17,8 +17,8 @@ const keynoteTopics = [
 
 const navLinks = [
   { href: '/about', label: 'About' },
-  { href: '/keynotes', label: 'Keynotes', dropdown: true },
-  { href: '/contact', label: 'Contact' },
+  { href: '/keynotes', label: 'Topics', dropdown: true },
+  { href: '/case-studies', label: 'Case Studies' },
 ]
 
 export default function Nav() {
@@ -49,8 +49,6 @@ export default function Nav() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
   const isHome = pathname === '/'
 
-  // On homepage: transparent over dark hero → white on scroll
-  // On other pages: solid white always
   const navBg = isHome
     ? scrolled ? 'rgba(255,255,255,0.97)' : 'transparent'
     : '#fff'
@@ -104,9 +102,9 @@ export default function Nav() {
                     padding: '0.5rem 0',
                   }}>
                     <Link href="/keynotes" style={{ display: 'block', padding: '0.625rem 1.25rem', fontSize: '0.8125rem', fontWeight: 600, color: '#111111', borderBottom: '1px solid #e5e5e5', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                      All keynotes
+                      All topics
                     </Link>
-                    {keynoteTopics.map(t => (
+                    {topicLinks.map(t => (
                       <Link key={t.href} href={t.href} style={{ display: 'block', padding: '0.5rem 1.25rem', fontSize: '0.875rem', color: '#737373', transition: 'color 0.15s, background 0.15s' }}
                         onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#111111'; (e.currentTarget as HTMLElement).style.background = '#fafafa' }}
                         onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#737373'; (e.currentTarget as HTMLElement).style.background = '' }}
@@ -132,8 +130,8 @@ export default function Nav() {
         <button
           onClick={() => setMobileOpen(o => !o)}
           aria-label="Toggle menu"
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: hamburgerColor, display: 'none', transition: 'color 0.3s' }}
-          className="md:block"
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: hamburgerColor, transition: 'color 0.3s' }}
+          className="show-mobile"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -141,20 +139,20 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div style={{ background: '#fff', borderTop: '1px solid var(--color-border)', padding: '1rem 1.25rem 2rem' }}>
+        <div style={{ background: '#fff', borderTop: '1px solid var(--color-border)', padding: '1rem 1.5rem 2.5rem' }}>
           {navLinks.map(link => (
             <div key={link.href}>
               <Link href={link.href} style={{ display: 'block', padding: '0.875rem 0', fontSize: '1rem', fontWeight: 600, color: 'var(--color-navy)', borderBottom: '1px solid var(--color-border)' }}>
                 {link.label}
               </Link>
-              {link.dropdown && keynoteTopics.map(t => (
+              {link.dropdown && topicLinks.map(t => (
                 <Link key={t.href} href={t.href} style={{ display: 'block', padding: '0.625rem 0 0.625rem 1rem', fontSize: '0.875rem', color: 'var(--color-mid-grey)', borderBottom: '1px solid var(--color-border)' }}>
                   {t.label}
                 </Link>
               ))}
             </div>
           ))}
-          <Link href="/contact" className="btn-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.25rem' }}>
+          <Link href="/contact" className="btn-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>
             Book Elliot
           </Link>
         </div>
