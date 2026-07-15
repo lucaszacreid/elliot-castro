@@ -8,13 +8,6 @@ export const metadata: Metadata = {
   description: 'Award-winning keynote speaker and consultant on fraud, cybersecurity, social engineering, and criminal psychology. Trusted by banks, police forces, and corporations.',
 }
 
-const keynoteThemes = [
-  { title: 'Fraud Prevention', desc: 'How modern fraudsters think, identify vulnerabilities, and exploit businesses — and what you can do about it.', href: '/keynotes#fraud-prevention' },
-  { title: 'Cybersecurity Awareness', desc: 'How criminals steal personal and financial data, and how organisations build genuine defences.', href: '/keynotes#cybersecurity' },
-  { title: 'Social Engineering', desc: 'How scammers manipulate employees into revealing confidential information — and how to make your team resilient.', href: '/keynotes#social-engineering' },
-  { title: 'Criminal Psychology', desc: 'Why intelligent people commit fraud, and the mindset behind organised financial crime.', href: '/keynotes#psychology' },
-]
-
 const mediaSources = ['BBC', 'Monzo', 'Experian']
 
 const testimonials = [
@@ -27,48 +20,46 @@ export default function HomePage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section style={{ background: 'var(--color-navy)', minHeight: 'calc(100vh - 72px)', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
+      <section className="hero-section">
         {/* Portrait */}
-        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '50%', pointerEvents: 'none' }} aria-hidden="true">
+        <div className="hero-portrait" aria-hidden="true">
           <Image
-            src="/hero-portrait.png"
+            src="/hero-lander.png"
             alt=""
-            fill
+            width={900}
+            height={1100}
             priority
-            style={{ objectFit: 'contain', objectPosition: 'right bottom', mixBlendMode: 'multiply', filter: 'brightness(7) contrast(0.65)' }}
+            style={{ height: '100%', width: 'auto', maxWidth: '65%', objectFit: 'contain', objectPosition: 'bottom right' }}
           />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--color-navy) 0%, rgba(15,32,64,0.6) 30%, rgba(15,32,64,0.1) 65%, transparent 85%)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--color-navy) 0%, transparent 30%)' }} />
         </div>
 
-        <div className="container" style={{ position: 'relative', padding: '6rem 2rem' }}>
-          <AnimateIn>
-            <p className="section-label" style={{ color: 'rgba(255,255,255,0.6)' }}>Keynote Speaker · Consultant · Media Commentator</p>
-            <h1 style={{ color: '#fff', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', maxWidth: 620, marginBottom: '1.5rem', lineHeight: 1.1 }}>
-              The insider who became the expert.
-            </h1>
-            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1.125rem', maxWidth: 480, lineHeight: 1.75, marginBottom: '2.5rem' }}>
-              Elliot Castro draws on a unique personal journey — from convicted international fraudster to trusted adviser to banks, police forces, and corporations — to deliver keynotes that genuinely change how organisations think about risk.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link href="/contact" className="btn-primary">Book Elliot to Speak</Link>
-              <Link href="/about" className="btn-outline" style={{ borderColor: 'rgba(255,255,255,0.4)', color: '#fff' }}>Learn his story</Link>
-            </div>
-          </AnimateIn>
+        {/* Gradient overlay */}
+        <div className="hero-gradient" aria-hidden="true" />
+
+        {/* Text content — anchored to bottom-left */}
+        <div className="hero-content">
+          <p className="hero-overline">Elliot Castro</p>
+          <h1 className="hero-headline">
+            The insider who<br />became the expert.
+          </h1>
+          <Link href="/contact" className="hero-cta">
+            Book Elliot
+          </Link>
         </div>
       </section>
 
       {/* ── Trust bar ── */}
-      <section style={{ borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', padding: '1.25rem 0', background: 'var(--color-off-white)', overflow: 'hidden' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0' }}>
-          {/* "As seen on" label — fixed left */}
-          <p style={{ fontSize: '0.6875rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-mid-grey)', fontWeight: 600, flexShrink: 0, padding: '0 2rem 0 2rem', borderRight: '1px solid var(--color-border)', marginRight: '3rem' }}>As seen on</p>
-
-          {/* Scrolling track — two copies for seamless loop */}
+      <section style={{ background: '#0f0f0f', padding: '1.125rem 0', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <p style={{ fontSize: '0.625rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', fontWeight: 600, flexShrink: 0, padding: '0 2rem', borderRight: '1px solid rgba(255,255,255,0.1)', whiteSpace: 'nowrap' }}>
+            As seen on
+          </p>
           <div style={{ overflow: 'hidden', flex: 1 }}>
             <div className="trust-track">
               {[...mediaSources, ...mediaSources].map((src, i) => (
-                <span key={i} style={{ fontSize: '1.0625rem', fontWeight: 700, color: 'var(--color-navy)', letterSpacing: '0.06em', padding: '0 3rem', flexShrink: 0 }}>{src}</span>
+                <span key={i} style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.1em', padding: '0 3.5rem', flexShrink: 0, textTransform: 'uppercase' }}>
+                  {src}
+                </span>
               ))}
             </div>
           </div>
@@ -97,59 +88,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Keynote themes ── */}
-      <section style={{ padding: '7rem 2rem', background: 'var(--color-off-white)' }}>
-        <div className="container">
-          <AnimateIn>
-            <p className="section-label" style={{ textAlign: 'center' }}>Keynote Themes</p>
-            <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', maxWidth: 560, margin: '0 auto 1rem' }}>Talks that make audiences think differently about risk.</h2>
-            <p style={{ textAlign: 'center', color: 'var(--color-mid-grey)', maxWidth: 520, margin: '0 auto 4rem' }}>Every keynote is tailored to your sector, audience, and event objectives — no two talks are the same.</p>
-          </AnimateIn>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
-            {keynoteThemes.map((theme, i) => (
-              <AnimateIn key={theme.title} delay={i * 80}>
-                <Link href={theme.href} style={{
-                  display: 'block', padding: '2.25rem', background: '#fff',
-                  border: '1px solid var(--color-border)',
-                  transition: 'box-shadow 0.2s, border-color 0.2s',
-                }}>
-                  <div style={{ width: 32, height: 3, background: 'var(--color-green)', marginBottom: '1.25rem' }} />
-                  <h3 style={{ fontSize: '1.125rem', marginBottom: '0.75rem' }}>{theme.title}</h3>
-                  <p style={{ color: 'var(--color-mid-grey)', fontSize: '0.9375rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>{theme.desc}</p>
-                  <span style={{ fontSize: '0.8125rem', color: 'var(--color-green)', fontWeight: 600 }}>Learn more →</span>
-                </Link>
-              </AnimateIn>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-            <Link href="/keynotes" className="btn-outline">View all keynote themes</Link>
-          </div>
-        </div>
-      </section>
-
       {/* ── Pull quote ── */}
-      <section style={{ padding: '7rem 2rem', background: 'var(--color-navy)' }}>
+      <section style={{ padding: '7rem 2rem', background: '#111111' }}>
         <AnimateIn>
           <div style={{ maxWidth: 780, margin: '0 auto', textAlign: 'center' }}>
             <p style={{ fontSize: 'clamp(1.375rem, 3vw, 2rem)', fontFamily: 'var(--font-playfair), Georgia, serif', fontStyle: 'italic', color: '#fff', lineHeight: 1.55, marginBottom: '2rem' }}>
               &ldquo;[Bold pull quote — a striking line about fraud, trust, or deception that positions Elliot's unique angle — TBC]&rdquo;
             </p>
-            <div style={{ width: 48, height: 2, background: 'var(--color-green)', margin: '0 auto' }} />
+            <div style={{ width: 48, height: 1, background: 'rgba(255,255,255,0.3)', margin: '0 auto' }} />
           </div>
         </AnimateIn>
       </section>
 
       {/* ── Testimonials ── */}
-      <section style={{ padding: '7rem 2rem' }}>
+      <section style={{ padding: '7rem 2rem', background: 'var(--color-off-white)' }}>
         <div className="container">
           <AnimateIn>
             <p className="section-label" style={{ textAlign: 'center' }}>What People Say</p>
             <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '4rem' }}>Trusted by organisations across the UK.</h2>
           </AnimateIn>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2px', background: 'var(--color-border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', background: 'var(--color-border)' }}>
             {testimonials.map((t, i) => (
               <AnimateIn key={i} delay={i * 100}>
                 <div style={{ background: '#fff', padding: '2.5rem' }}>
@@ -176,14 +135,12 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA Banner ── */}
-      <section style={{ padding: '6rem 2rem', background: 'var(--color-green)' }}>
+      <section style={{ padding: '6rem 2rem', background: '#111111' }}>
         <AnimateIn>
           <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
             <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '1rem' }}>Ready to book Elliot for your event?</h2>
-            <p style={{ color: 'rgba(255,255,255,0.85)', marginBottom: '2.5rem', fontSize: '1rem' }}>Speaking, consultancy, and media enquiries all welcome. Elliot responds personally.</p>
-            <Link href="/contact" style={{ background: '#fff', color: 'var(--color-green)', padding: '1rem 2.5rem', fontSize: '0.9375rem', fontWeight: 700, display: 'inline-block', letterSpacing: '0.02em' }}>
-              Make an enquiry
-            </Link>
+            <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '2.5rem', fontSize: '1rem' }}>Speaking, consultancy, and media enquiries all welcome. Elliot responds personally.</p>
+            <Link href="/contact" className="hero-cta">Make an enquiry</Link>
           </div>
         </AnimateIn>
       </section>

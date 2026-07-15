@@ -47,19 +47,33 @@ export default function Nav() {
   }, [])
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
+  const isHome = pathname === '/'
+
+  // On homepage: transparent over dark hero → white on scroll
+  // On other pages: solid white always
+  const navBg = isHome
+    ? scrolled ? 'rgba(255,255,255,0.97)' : 'transparent'
+    : '#fff'
+  const navBorder = isHome && !scrolled ? 'transparent' : '#e5e5e5'
+  const logoColor = isHome && !scrolled ? '#fff' : '#111111'
+  const linkColor = (active: boolean) =>
+    isHome && !scrolled
+      ? active ? '#fff' : 'rgba(255,255,255,0.65)'
+      : active ? '#111111' : '#737373'
+  const hamburgerColor = isHome && !scrolled ? '#fff' : '#111111'
 
   return (
     <header style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      background: scrolled ? 'rgba(255,255,255,0.97)' : '#fff',
-      borderBottom: `1px solid ${scrolled ? '#DDE2EC' : '#DDE2EC'}`,
-      boxShadow: scrolled ? '0 1px 12px rgba(15,32,64,0.08)' : 'none',
-      transition: 'box-shadow 0.3s',
+      background: navBg,
+      borderBottom: `1px solid ${navBorder}`,
+      boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.10)' : 'none',
+      transition: 'background 0.3s, box-shadow 0.3s, border-color 0.3s',
     }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 2rem', height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
         {/* Logo */}
-        <Link href="/" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontSize: '1.125rem', fontWeight: 700, color: 'var(--color-navy)', letterSpacing: '0.01em' }}>
+        <Link href="/" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontSize: '1.125rem', fontWeight: 700, color: logoColor, letterSpacing: '0.01em', transition: 'color 0.3s' }}>
           Elliot Castro
         </Link>
 
@@ -74,7 +88,7 @@ export default function Nav() {
                     display: 'flex', alignItems: 'center', gap: '0.25rem',
                     background: 'none', border: 'none', cursor: 'pointer',
                     fontSize: '0.875rem', fontWeight: isActive(link.href) ? 600 : 400,
-                    color: isActive(link.href) ? 'var(--color-navy)' : 'var(--color-mid-grey)',
+                    color: linkColor(isActive(link.href)),
                     transition: 'color 0.2s',
                   }}
                 >
@@ -85,17 +99,17 @@ export default function Nav() {
                 {dropdownOpen && (
                   <div style={{
                     position: 'absolute', top: 'calc(100% + 12px)', left: '50%', transform: 'translateX(-50%)',
-                    background: '#fff', border: '1px solid var(--color-border)',
-                    boxShadow: '0 8px 24px rgba(15,32,64,0.12)', minWidth: 240, zIndex: 200,
+                    background: '#fff', border: '1px solid #e5e5e5',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.12)', minWidth: 240, zIndex: 200,
                     padding: '0.5rem 0',
                   }}>
-                    <Link href="/keynotes" style={{ display: 'block', padding: '0.625rem 1.25rem', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-navy)', borderBottom: '1px solid var(--color-border)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                    <Link href="/keynotes" style={{ display: 'block', padding: '0.625rem 1.25rem', fontSize: '0.8125rem', fontWeight: 600, color: '#111111', borderBottom: '1px solid #e5e5e5', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
                       All keynotes
                     </Link>
                     {keynoteTopics.map(t => (
-                      <Link key={t.href} href={t.href} style={{ display: 'block', padding: '0.5rem 1.25rem', fontSize: '0.875rem', color: 'var(--color-mid-grey)', transition: 'color 0.15s, background 0.15s' }}
-                        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-navy)'; (e.currentTarget as HTMLElement).style.background = 'var(--color-off-white)' }}
-                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--color-mid-grey)'; (e.currentTarget as HTMLElement).style.background = '' }}
+                      <Link key={t.href} href={t.href} style={{ display: 'block', padding: '0.5rem 1.25rem', fontSize: '0.875rem', color: '#737373', transition: 'color 0.15s, background 0.15s' }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#111111'; (e.currentTarget as HTMLElement).style.background = '#fafafa' }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#737373'; (e.currentTarget as HTMLElement).style.background = '' }}
                       >
                         {t.label}
                       </Link>
@@ -104,12 +118,12 @@ export default function Nav() {
                 )}
               </div>
             ) : (
-              <Link key={link.href} href={link.href} style={{ fontSize: '0.875rem', fontWeight: isActive(link.href) ? 600 : 400, color: isActive(link.href) ? 'var(--color-navy)' : 'var(--color-mid-grey)', transition: 'color 0.2s' }}>
+              <Link key={link.href} href={link.href} style={{ fontSize: '0.875rem', fontWeight: isActive(link.href) ? 600 : 400, color: linkColor(isActive(link.href)), transition: 'color 0.2s' }}>
                 {link.label}
               </Link>
             )
           )}
-          <Link href="/contact" className="btn-primary" style={{ padding: '0.625rem 1.5rem', fontSize: '0.8125rem' }}>
+          <Link href="/contact" className="btn-primary" style={{ padding: '0.625rem 1.5rem', fontSize: '0.75rem' }}>
             Book Elliot
           </Link>
         </nav>
@@ -118,7 +132,7 @@ export default function Nav() {
         <button
           onClick={() => setMobileOpen(o => !o)}
           aria-label="Toggle menu"
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-navy)', display: 'none' }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: hamburgerColor, display: 'none', transition: 'color 0.3s' }}
           className="md:block"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
