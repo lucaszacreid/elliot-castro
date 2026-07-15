@@ -6,7 +6,8 @@ const logos = [
   { src: '/logos/monzo.jpg', alt: 'Monzo', w: 110, h: 48 },
 ]
 
-const HALF = 8
+// 18 per half → ~18 × 230px ≈ 4140px — wider than any viewport so no black gap on loop
+const HALF = 18
 const half = Array.from({ length: HALF }, (_, i) => logos[i % logos.length])
 const items = [...half, ...half]
 

@@ -125,7 +125,7 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   display: flex;
   align-items: center;
   width: max-content;
-  animation: marquee 24s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -183,7 +183,7 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
 .hero-content {
   position: relative;
   z-index: 10;
-  padding: 3rem 2rem 5rem;
+  padding: 3rem 2rem 2.5rem;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
@@ -254,7 +254,7 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   }
 
   .hero-content {
-    padding: 2rem 1.25rem 5.5rem;
+    padding: 2rem 1.25rem 2rem;
   }
 
   /* Topics grid → single column */

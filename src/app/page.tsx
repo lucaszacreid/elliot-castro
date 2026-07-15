@@ -51,10 +51,11 @@ export default function HomePage() {
             Book Elliot
           </Link>
         </div>
+        {/* Trust bar anchored to hero bottom */}
+        <div style={{ position: 'relative', zIndex: 10 }}>
+          <TrustBar />
+        </div>
       </section>
-
-      {/* ── Trust bar 1 ── */}
-      <TrustBar />
 
       {/* ── Topics ── */}
       <section style={{ padding: '6rem 2rem' }}>
