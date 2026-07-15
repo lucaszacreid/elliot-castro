@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Store in database
-    insertEnquiry({
+    await insertEnquiry({
       name,
       email,
       phone: data.phone ?? '',

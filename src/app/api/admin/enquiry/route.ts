@@ -8,6 +8,6 @@ export async function PATCH(req: NextRequest) {
   }
   const { id, status } = await req.json()
   if (!id || !status) return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
-  updateEnquiryStatus(id, status)
+  await updateEnquiryStatus(id, status)
   return NextResponse.json({ ok: true })
 }

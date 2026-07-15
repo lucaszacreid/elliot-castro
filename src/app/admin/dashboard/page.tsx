@@ -10,7 +10,7 @@ export default async function DashboardPage() {
   const authed = await isAdminAuthenticated()
   if (!authed) redirect('/admin')
 
-  const enquiries = getAllEnquiries()
+  const enquiries = await getAllEnquiries()
 
   return <DashboardClient enquiries={enquiries} />
 }
