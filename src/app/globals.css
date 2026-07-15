@@ -232,18 +232,26 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   /* Container */
   .container { padding: 0 1.25rem; }
 
-  /* Hero mobile: cover the full hero, face at top-centre */
+  /* Portrait container: start below the fixed 72px nav */
+  .hero-portrait {
+    top: 72px !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+  }
+
+  /* Image: contained at 82% width — full portrait visible, slight side margins */
   .hero-portrait img {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    object-fit: cover !important;
+    position: static !important;
+    inset: auto !important;
+    width: 82% !important;
+    height: auto !important;
+    max-width: 82% !important;
+    max-height: none !important;
+    object-fit: contain !important;
     object-position: top center !important;
   }
 
-  /* Gradient only darkens the bottom strip for text — top stays clear */
+  /* Gradient: solid dark only at the bottom for text readability */
   .hero-gradient {
     background: linear-gradient(to top, #111111 0%, #111111 30%, transparent 58%);
   }
