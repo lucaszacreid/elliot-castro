@@ -114,11 +114,8 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   to   { transform: translateX(-50%); }
 }
 
-/* Edge fade hides partial logos as they enter/exit viewport */
 .trust-bar-inner {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 .trust-track {
@@ -126,10 +123,78 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   align-items: center;
   width: max-content;
   animation: marquee 40s linear infinite;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust-track { animation: none; }
+  .trust-track { animation-play-state: paused; }
+}
+
+/* ── Documentary section ── */
+.doc-link {
+  display: block;
+  max-width: 760px;
+  text-decoration: none;
+}
+.doc-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #1c1c1c;
+  overflow: hidden;
+  border-radius: 6px;
+  transition: transform 0.4s ease;
+}
+.doc-link:hover .doc-thumb {
+  transform: scale(1.012);
+}
+.doc-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.doc-play-btn::before {
+  content: '';
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.07);
+  position: absolute;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+}
+.doc-link:hover .doc-play-btn::before {
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.1);
+}
+.doc-play-btn svg {
+  position: relative;
+  z-index: 1;
+}
+.doc-label-chip {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.doc-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.875rem 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.35);
+  transition: color 0.2s;
+}
+.doc-link:hover .doc-footer {
+  color: rgba(255,255,255,0.6);
 }
 
 /* ── Topics grid (homepage) ── */

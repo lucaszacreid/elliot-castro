@@ -25,6 +25,7 @@ export default function TrustBar() {
                 height={logo.h}
                 style={{ height: 48, width: 'auto', objectFit: 'contain' }}
                 unoptimized
+                loading="eager"
               />
             </span>
           ))}

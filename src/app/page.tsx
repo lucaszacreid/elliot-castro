@@ -57,6 +57,53 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Documentary ── */}
+      {/* TODO: replace href="#" below with the real YouTube documentary URL from Elliot */}
+      <section style={{ padding: '5rem 2rem 5.5rem', background: '#0d0d0d' }}>
+        <div className="container">
+          <AnimateIn>
+            <p className="section-label" style={{ color: 'rgba(255,255,255,0.38)' }}>Documentary</p>
+            <h2 style={{
+              fontFamily: 'var(--font-playfair), Georgia, serif',
+              fontSize: 'clamp(1.875rem, 3.5vw, 2.875rem)',
+              color: '#ffffff',
+              marginTop: '0.75rem',
+              marginBottom: '1rem',
+              maxWidth: 520,
+              lineHeight: 1.12,
+            }}>
+              The full story.
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.45)', maxWidth: 440, lineHeight: 1.85, marginBottom: '2.75rem', fontSize: '0.9375rem' }}>
+              From international fraudster to trusted adviser — how one man&apos;s inside knowledge became the most valuable asset in the room.
+            </p>
+          </AnimateIn>
+
+          <AnimateIn delay={140}>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="doc-link"
+              aria-label="Watch the documentary on YouTube"
+            >
+              <div className="doc-thumb">
+                <div className="doc-play-btn">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width={26} height={26} style={{ marginLeft: 4 }}>
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+                <span className="doc-label-chip">Available on YouTube</span>
+              </div>
+              <div className="doc-footer">
+                <span>Watch now</span>
+                <span>→</span>
+              </div>
+            </a>
+          </AnimateIn>
+        </div>
+      </section>
+
       {/* ── Topics ── */}
       <section style={{ padding: '6rem 2rem' }}>
         <div className="container">
