@@ -16,7 +16,7 @@ export default function ContactPage() {
           <AnimateIn>
             <p className="section-label" style={{ color: 'rgba(255,255,255,0.6)' }}>Get in touch</p>
             <h1 style={{ color: '#fff', fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', maxWidth: 600, lineHeight: 1.12, marginBottom: '1.25rem' }}>
-              Let's talk.
+              Let&apos;s talk.
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.7)', maxWidth: 480, lineHeight: 1.8 }}>
               Elliot responds to all serious enquiries personally. Use the form below or email{' '}

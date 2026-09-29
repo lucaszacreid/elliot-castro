@@ -33,7 +33,6 @@ export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?:
     name: '', email: '', phone: '', organisation: '', type: defaultType, eventDate: '', message: '',
   })
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
   const honeypotRef = useRef<HTMLInputElement>(null)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
@@ -51,21 +50,18 @@ export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?:
     e.preventDefault()
     if (honeypotRef.current?.value) return
     setStatus('submitting')
-    setErrorMsg('')
     try {
       const res = await fetch('/api/enquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
-      if (!res.ok) {
-        const body = await res.text()
-        throw new Error(body || 'Request failed')
-      }
+      if (!res.ok) throw new Error('Request failed')
       setStatus('success')
     } catch (err) {
       setStatus('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+      // Don't surface raw API responses to visitors; the default message below is shown instead
+      console.error(err)
     }
   }
 
@@ -87,7 +83,7 @@ export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?:
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Honeypot — hidden from real users */}
       <input ref={honeypotRef} type="text" name="website" tabIndex={-1} aria-hidden="true" style={{ position: 'absolute', left: '-9999px' }} />
 
@@ -138,7 +134,7 @@ export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?:
 
       {status === 'error' && (
         <p style={{ color: '#C0392B', fontSize: '0.875rem', padding: '0.75rem 1rem', background: '#FEF2F2', border: '1px solid #FCA5A5' }}>
-          {errorMsg || 'Something went wrong. Please try again or email elliot@elliotcastro.com directly.'}
+          Something went wrong. Please try again or email elliot@elliotcastro.com directly.
         </p>
       )}
 

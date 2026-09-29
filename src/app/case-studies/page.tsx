@@ -3,7 +3,7 @@ import Link from 'next/link'
 import AnimateIn from '@/components/AnimateIn'
 
 export const metadata: Metadata = {
-  title: 'Case Studies — Elliot Castro',
+  title: 'Case Studies',
   description: 'Real outcomes from organisations Elliot has worked with — keynotes, consultancy, and advisory engagements.',
 }
 

@@ -26,7 +26,13 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  useEffect(() => { setMobileOpen(false); setDropdownOpen(false) }, [pathname])
+  // Close menus on any link selection — including same-page anchors, where the pathname doesn't change
+  function closeMenusOnLinkClick(e: React.MouseEvent) {
+    if ((e.target as HTMLElement).closest('a')) {
+      setMobileOpen(false)
+      setDropdownOpen(false)
+    }
+  }
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -55,7 +61,7 @@ export default function Nav() {
   const hamburgerColor = isHome && !scrolled ? '#fff' : '#111111'
 
   return (
-    <header style={{
+    <header onClick={closeMenusOnLinkClick} style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
       background: navBg,
       borderBottom: `1px solid ${navBorder}`,

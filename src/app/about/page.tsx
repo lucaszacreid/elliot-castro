@@ -102,7 +102,7 @@ export default function AboutPage() {
             <p style={{ color: 'rgba(255,255,255,0.75)', marginBottom: '2.5rem' }}>
               Keynotes, workshops, corporate consultancy, or media enquiries — get in touch to discuss how Elliot can help.
             </p>
-            <Link href="/contact" className="btn-primary">Make an enquiry</Link>
+            <Link href="/contact" className="btn-primary" style={{ background: '#fff', color: '#111111' }}>Make an enquiry</Link>
           </div>
         </AnimateIn>
       </section>
