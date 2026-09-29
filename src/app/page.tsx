@@ -5,20 +5,13 @@ import AnimateIn from '@/components/AnimateIn'
 import TrustBar from '@/components/TrustBar'
 import InActionGallery from '@/components/InActionGallery'
 import EnquiryForm from '@/components/EnquiryForm'
+import TopicGrid from '@/components/TopicGrid'
+import { SHORT_BIO_FIRST_PARAGRAPH } from '@/lib/topics'
 
 export const metadata: Metadata = {
-  title: 'Elliot Castro — Keynote Speaker | Fraud, Cybersecurity & Criminal Psychology',
-  description: 'Award-winning keynote speaker and consultant on fraud, cybersecurity, social engineering, and criminal psychology. Trusted by banks, police forces, and corporations.',
+  title: 'Elliot Castro — Fraud Keynote Speaker & Consultant',
+  description: SHORT_BIO_FIRST_PARAGRAPH,
 }
-
-const topicTeasers = [
-  { title: 'Fraud Prevention', slug: 'fraud-prevention', line: 'How fraudsters think — and how to stop them.' },
-  { title: 'Social Engineering', slug: 'social-engineering', line: 'Manipulation is a skill. Train your team to recognise it.' },
-  { title: 'Cybersecurity Awareness', slug: 'cybersecurity', line: "The human layer your technology can't protect." },
-  { title: 'Insider Threats', slug: 'insider-threats', line: 'The risk already inside your organisation.' },
-  { title: 'Criminal Psychology', slug: 'psychology', line: 'Why ordinary people commit extraordinary crimes.' },
-  { title: 'Identity Theft', slug: 'identity-theft', line: 'Who you think you are, and who criminals think you are.' },
-]
 
 const testimonials = [
   { quote: '[Testimonial quote — copy pending from Elliot]', author: '[Name, Title]', org: '[Organisation]' },
@@ -129,25 +122,7 @@ export default function HomePage() {
             </p>
           </AnimateIn>
 
-          <div className="topics-grid">
-            {topicTeasers.map((topic, i) => (
-              <AnimateIn key={topic.slug} delay={i * 60}>
-                <Link
-                  href={`/keynotes#${topic.slug}`}
-                  style={{ display: 'block', borderTop: '1px solid var(--color-border)', padding: '1.75rem 0', textDecoration: 'none' }}
-                  className="topic-card"
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1.5rem' }}>
-                    <div>
-                      <p style={{ fontWeight: 600, color: 'var(--color-navy)', fontSize: '1rem', marginBottom: '0.375rem' }}>{topic.title}</p>
-                      <p style={{ color: 'var(--color-mid-grey)', fontSize: '0.875rem', lineHeight: 1.65 }}>{topic.line}</p>
-                    </div>
-                    <span style={{ color: 'var(--color-mid-grey)', fontSize: '1.25rem', flexShrink: 0, marginTop: '0.1rem', transition: 'transform 0.2s' }}>→</span>
-                  </div>
-                </Link>
-              </AnimateIn>
-            ))}
-          </div>
+          <TopicGrid />
           <div style={{ borderTop: '1px solid var(--color-border)' }} />
 
           <AnimateIn delay={400}>

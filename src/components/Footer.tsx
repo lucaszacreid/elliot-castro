@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { topics, SHORT_BIO_FIRST_PARAGRAPH } from '@/lib/topics'
 
 const cols = [
   {
@@ -11,13 +12,7 @@ const cols = [
   },
   {
     heading: 'Keynote Topics',
-    links: [
-      { href: '/keynotes#fraud-prevention', label: 'Fraud Prevention' },
-      { href: '/keynotes#cybersecurity', label: 'Cybersecurity' },
-      { href: '/keynotes#social-engineering', label: 'Social Engineering' },
-      { href: '/keynotes#psychology', label: 'Criminal Psychology' },
-      { href: '/keynotes#insider-threats', label: 'Insider Threats' },
-    ],
+    links: topics.map(t => ({ href: `/keynotes#${t.slug}`, label: t.title })),
   },
   {
     heading: 'Legal',
@@ -38,7 +33,7 @@ export default function Footer() {
           <div>
             <p style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem' }}>Elliot Castro</p>
             <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, maxWidth: 260 }}>
-              Keynote speaker and consultant on fraud, cybersecurity, and criminal psychology.
+              {SHORT_BIO_FIRST_PARAGRAPH}
             </p>
             <Link href="/contact" style={{ display: 'inline-block', marginTop: '1.5rem', background: 'var(--color-green)', color: '#fff', padding: '0.75rem 1.5rem', fontSize: '0.8125rem', fontWeight: 600, letterSpacing: '0.04em' }}>
               Book a talk

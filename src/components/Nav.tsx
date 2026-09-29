@@ -3,17 +3,9 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import { topics } from '@/lib/topics'
 
-const topicLinks = [
-  { label: 'Fraud Prevention', href: '/keynotes#fraud-prevention' },
-  { label: 'Cybersecurity Awareness', href: '/keynotes#cybersecurity' },
-  { label: 'Identity Theft', href: '/keynotes#identity-theft' },
-  { label: 'Social Engineering', href: '/keynotes#social-engineering' },
-  { label: 'Criminal Psychology', href: '/keynotes#psychology' },
-  { label: 'Insider Threats', href: '/keynotes#insider-threats' },
-  { label: 'Risk Management', href: '/keynotes#risk-management' },
-  { label: 'Ethics & Transformation', href: '/keynotes#ethics' },
-]
+const topicLinks = topics.map(t => ({ label: t.title, href: `/keynotes#${t.slug}` }))
 
 const navLinks = [
   { href: '/about', label: 'About' },
