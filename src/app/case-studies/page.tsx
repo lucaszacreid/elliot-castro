@@ -2,37 +2,22 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import AnimateIn from '@/components/AnimateIn'
 
+// Hidden from nav, footer and sitemap until real case studies are supplied.
 export const metadata: Metadata = {
-  title: 'Case Studies — Elliot Castro',
-  description: 'Real outcomes from organisations Elliot has worked with — keynotes, consultancy, and advisory engagements.',
+  title: 'Case Studies',
+  description: 'Selected speaking and consultancy engagements from fraud keynote speaker Elliot Castro.',
+  robots: { index: false, follow: true },
 }
 
-const placeholders = [
-  {
-    org: '[Organisation name — TBC]',
-    sector: '[Sector — TBC]',
-    type: 'Keynote speaking',
-    outcome: '[Brief outcome — e.g. "Delivered fraud awareness keynote to 400 senior staff. Zero reported incidents in subsequent quarter." — copy pending from Elliot]',
-    quote: '[Testimonial quote — copy pending from Elliot]',
-    attribution: '[Name, Title, Organisation — TBC]',
-  },
-  {
-    org: '[Organisation name — TBC]',
-    sector: '[Sector — TBC]',
-    type: 'Consultancy',
-    outcome: '[Brief outcome — e.g. "Conducted fraud risk audit and delivered board-level recommendations. Two critical control gaps identified." — copy pending from Elliot]',
-    quote: '[Testimonial quote — copy pending from Elliot]',
-    attribution: '[Name, Title, Organisation — TBC]',
-  },
-  {
-    org: '[Organisation name — TBC]',
-    sector: '[Sector — TBC]',
-    type: 'Workshop & training',
-    outcome: '[Brief outcome — e.g. "Full-day social engineering workshop for security team. Measurably improved phishing test scores over 6 months." — copy pending from Elliot]',
-    quote: '[Testimonial quote — copy pending from Elliot]',
-    attribution: '[Name, Title, Organisation — TBC]',
-  },
-]
+// TODO: replace with genuine case studies supplied by Elliot
+const placeholders = [1, 2, 3].map(n => ({
+  org: `{{CASE_STUDY_${n}_ORG}}`,
+  sector: `{{CASE_STUDY_${n}_SECTOR}}`,
+  type: n === 2 ? 'Consultancy & advisory' : 'Speaking',
+  outcome: `{{CASE_STUDY_${n}_SUMMARY}}`,
+  quote: `{{CASE_STUDY_${n}_QUOTE}}`,
+  attribution: `{{CASE_STUDY_${n}_NAME_TITLE}}`,
+}))
 
 export default function CaseStudiesPage() {
   return (
@@ -40,12 +25,12 @@ export default function CaseStudiesPage() {
       <section style={{ padding: '5rem 2rem 4rem', background: 'var(--color-navy)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
         <div className="container">
           <AnimateIn>
-            <p className="section-label" style={{ color: 'rgba(255,255,255,0.6)' }}>Outcomes</p>
+            <p className="section-label" style={{ color: 'rgba(255,255,255,0.6)' }}>Case studies</p>
             <h1 style={{ color: '#fff', fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', maxWidth: 680, lineHeight: 1.12, marginBottom: '1.25rem' }}>
-              Real results from real engagements.
+              Selected engagements.
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.65)', maxWidth: 520, lineHeight: 1.8 }}>
-              Organisations that book Elliot come away with changed perspectives, not just improved awareness. Here is a selection of engagements and outcomes.
+              A selection of speaking and consultancy work with corporate and financial-services organisations.
             </p>
           </AnimateIn>
         </div>
@@ -93,13 +78,13 @@ export default function CaseStudiesPage() {
         <AnimateIn>
           <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
             <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '1rem' }}>
-              Want to discuss your requirements?
+              Planning an event?
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.65)', marginBottom: '2.5rem', lineHeight: 1.7 }}>
-              Elliot responds to all serious enquiries personally. Get in touch to talk through what you need.
+              Share your event date, audience and format, and Elliot will respond personally.
             </p>
             <Link href="/contact" className="btn-primary" style={{ background: '#fff', color: '#111111' }}>
-              Make an enquiry
+              Enquire about speaking
             </Link>
           </div>
         </AnimateIn>
