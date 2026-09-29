@@ -9,17 +9,6 @@ export const metadata: Metadata = {
   description: SHORT_BIO_FIRST_PARAGRAPH,
 }
 
-const expertiseAreas = [
-  'Fraud & Scam Psychology',
-  'Social Engineering Tactics',
-  'Trust Exploitation',
-  'Behavioural Manipulation',
-  'Corporate Fraud Risk',
-  'Consumer Scam Prevention',
-  'Identity & Impersonation Fraud',
-  'Online & Phone Fraud',
-]
-
 const credentials = [
   { label: 'Based in', value: 'United Kingdom' },
   { label: 'Available for', value: 'UK & International' },
@@ -102,25 +91,6 @@ export default function AboutPage() {
               </div>
             </div>
           </AnimateIn>
-        </div>
-      </section>
-
-      {/* ── Expertise grid ── */}
-      <section style={{ padding: '5rem 2rem', background: 'var(--color-off-white)', borderTop: '1px solid var(--color-border)' }}>
-        <div className="container">
-          <AnimateIn>
-            <p className="section-label">Areas of expertise</p>
-          </AnimateIn>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1px', background: 'var(--color-border)', marginTop: '2rem' }}>
-            {expertiseAreas.map((area, i) => (
-              <AnimateIn key={area} delay={i * 60}>
-                <div style={{ background: '#fff', padding: '1.75rem 2rem' }}>
-                  <div style={{ width: 20, height: 2, background: 'var(--color-green)', marginBottom: '0.875rem' }} />
-                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-navy)', fontWeight: 500 }}>{area}</p>
-                </div>
-              </AnimateIn>
-            ))}
-          </div>
         </div>
       </section>
 
