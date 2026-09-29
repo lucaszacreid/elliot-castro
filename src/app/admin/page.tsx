@@ -42,6 +42,9 @@ export default function AdminLoginPage() {
               onChange={e => setPassword(e.target.value)}
               required
               autoComplete="current-password"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
               style={{ width: '100%', padding: '0.875rem 1rem', border: '1px solid var(--color-border)', background: '#fff', fontSize: '0.9375rem', outline: 'none', fontFamily: 'inherit' }}
             />
           </div>

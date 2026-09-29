@@ -11,7 +11,8 @@ export function hashPassword(password: string): string {
 export function checkPassword(input: unknown): boolean {
   const expected = process.env.ADMIN_PASSWORD ?? ''
   if (!expected || typeof input !== 'string') return false
-  const a = Buffer.from(hashPassword(input))
+  // Ignore stray whitespace from mobile keyboards / password managers
+  const a = Buffer.from(hashPassword(input.trim()))
   const b = Buffer.from(hashPassword(expected))
   if (a.length !== b.length) return false
   return timingSafeEqual(a, b)

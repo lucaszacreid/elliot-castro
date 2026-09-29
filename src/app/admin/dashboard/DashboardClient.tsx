@@ -10,7 +10,7 @@ const statusColors: Record<string, string> = {
   archived: '#9CA3AF',
 }
 
-export default function DashboardClient({ enquiries }: { enquiries: Enquiry[] }) {
+export default function DashboardClient({ enquiries, dbError = false }: { enquiries: Enquiry[]; dbError?: boolean }) {
   const [selected, setSelected] = useState<Enquiry | null>(null)
   const [filter, setFilter] = useState<string>('all')
   const router = useRouter()
@@ -40,6 +40,12 @@ export default function DashboardClient({ enquiries }: { enquiries: Enquiry[] })
           Sign out
         </button>
       </div>
+
+      {dbError && (
+        <p role="alert" style={{ margin: '1.5rem 2rem 0', padding: '0.875rem 1rem', fontSize: '0.875rem', color: '#92400E', background: '#FFFBEB', border: '1px solid #FCD34D' }}>
+          Enquiries can&apos;t be loaded because the enquiry database isn&apos;t connected. Website form submissions won&apos;t be saved until it is.
+        </p>
+      )}
 
       {/* Filter tabs */}
       <div style={{ background: '#fff', borderBottom: '1px solid var(--color-border)', padding: '0 2rem', display: 'flex', gap: '0' }}>
