@@ -2,21 +2,24 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import AnimateIn from '@/components/AnimateIn'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'About Elliot Castro',
-  description: 'From convicted international fraudster to trusted adviser to banks, police forces, and corporations. The story behind the speaker.',
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'About Elliot – Former Fraudster Turned Fraud Speaker & Consultant',
+  socialTitle: 'About Elliot Castro | Fraud Keynote Speaker & Consultant',
+  description: 'Elliot Castro is a former fraudster turned keynote speaker and consultant who helps organisations understand how offenders think, manufacture credibility and persuade people to act against their own interests.',
+  path: '/about',
+})
 
 const expertiseAreas = [
-  'Fraud & Scam Psychology',
-  'Social Engineering Tactics',
-  'Trust Exploitation',
-  'Behavioural Manipulation',
-  'Corporate Fraud Risk',
-  'Consumer Scam Prevention',
-  'Identity & Impersonation Fraud',
-  'Online & Phone Fraud',
+  'Fraud psychology',
+  'The criminal mindset',
+  'Social engineering',
+  'Trust & manipulation',
+  'Identity & impersonation',
+  'Human verification',
+  'Process exploitation',
+  'AI-enabled deception',
 ]
 
 const credentials = [
@@ -35,7 +38,7 @@ export default function AboutPage() {
           <AnimateIn>
             <p className="section-label" style={{ color: 'rgba(255,255,255,0.6)' }}>About</p>
             <h1 style={{ color: '#fff', fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', maxWidth: 700, lineHeight: 1.12 }}>
-              A story that earns the right to speak on fraud.
+              Fraud, from the other side of the equation.
             </h1>
           </AnimateIn>
         </div>
@@ -49,7 +52,7 @@ export default function AboutPage() {
             <div style={{ position: 'relative', marginBottom: '2rem' }}>
               <Image
                 src="/about-photo.jpg"
-                alt="Elliot Castro"
+                alt="Elliot Castro, fraud keynote speaker and consultant"
                 width={600}
                 height={750}
                 priority
@@ -72,34 +75,37 @@ export default function AboutPage() {
           <AnimateIn delay={120}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               <p style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontSize: '1.375rem', lineHeight: 1.55, color: 'var(--color-navy)', fontStyle: 'italic' }}>
-                Most people who talk about fraud have studied it. Elliot lived through it — on the wrong side of the law.
+                Elliot Castro is a former fraudster turned keynote speaker and consultant who now helps organisations understand fraud from a perspective most people never get to see: how offenders actually think, manufacture credibility and persuade people to act against their own interests.
               </p>
 
               <p style={{ color: 'var(--color-mid-grey)', lineHeight: 1.85 }}>
-                [Elliot's full story goes here — the events, the choices, the consequences, and the path out. This section should be written in Elliot's voice and reviewed carefully before publishing. It should be honest, restrained, and specific — not dramatic. The goal is credibility, not spectacle.]
+                His work explores the human mechanics underneath fraud &ndash; trust, authority, urgency, confidence, information gathering, impersonation and the exploitation of weaknesses in everyday processes. Rather than treating fraud simply as a technology or security problem, Elliot looks at the interaction between people, identity and process, and at the moments where apparently sensible decisions can become opportunities for manipulation.
               </p>
 
               <p style={{ color: 'var(--color-mid-grey)', lineHeight: 1.85 }}>
-                Today, Elliot advises organisations on how fraud actually works — not from a textbook, but from direct experience of the psychology, the tactics, and the vulnerabilities that make it possible. He speaks to audiences who need to understand deception in a way that changes their behaviour, not just their awareness.
+                That perspective comes from lived experience. After becoming involved in fraud at the young age of 15, Elliot ultimately faced prison and the consequences of the decisions he had made. What followed was a very different chapter: rebuilding his life and using what he had learned to help others understand and prevent the very behaviours he had once exploited.
               </p>
 
               <p style={{ color: 'var(--color-mid-grey)', lineHeight: 1.85 }}>
-                He is trusted by event organisers, corporate risk teams, and journalists precisely because he doesn't sensationalise. He explains clearly, draws on real events, and leaves audiences with practical understanding rather than fear.
+                Today, Elliot speaks to corporate, financial services and professional audiences about fraud psychology, the criminal mindset, social engineering, identity and impersonation, and the human behaviour behind scams. He also examines how newer technologies &ndash; including AI-enabled deception, deepfakes and voice cloning &ndash; can make familiar manipulation techniques faster, more scalable and more convincing.
               </p>
 
-              <blockquote style={{ borderLeft: '3px solid var(--color-green)', paddingLeft: '1.5rem', margin: '0.5rem 0' }}>
-                <p style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontSize: '1.125rem', fontStyle: 'italic', color: 'var(--color-navy)', lineHeight: 1.6 }}>
-                  &ldquo;The question I'm always asked is how people let it happen to them. The honest answer is: they're normal, and the person deceiving them was skilled.&rdquo;
-                </p>
-              </blockquote>
+              <p style={{ color: 'var(--color-mid-grey)', lineHeight: 1.85 }}>
+                His approach is deliberately accessible and non-technical. The aim is not to glorify criminal behaviour or simply tell an unusual story. It is to help audiences understand why fraud works, how trust is manufactured, where organisations become vulnerable and what criminals may notice that legitimate organisations overlook.
+              </p>
 
               <p style={{ color: 'var(--color-mid-grey)', lineHeight: 1.85 }}>
-                Elliot is available for keynote engagements, corporate consultancy, media commentary, and expert advisory roles. He works selectively — taking on projects where he believes his perspective adds genuine value.
+                Elliot&rsquo;s past is therefore the starting point, not the product. The value lies in translating that experience into practical insight about fraud, trust, manipulation, human behaviour and organisational resilience.
+              </p>
+
+              <p style={{ color: 'var(--color-mid-grey)', lineHeight: 1.85 }}>
+                Alongside speaking, Elliot works with organisations as a consultant and adviser.{' '}
+                <Link href="/consultancy" style={{ color: 'var(--color-navy)', fontWeight: 600, textDecoration: 'underline' }}>Explore consultancy &amp; advisory</Link>.
               </p>
 
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', paddingTop: '0.5rem' }}>
-                <Link href="/contact" className="btn-primary">Make an enquiry</Link>
-                <Link href="/keynotes" className="btn-outline">View keynotes</Link>
+                <Link href="/contact" className="btn-primary">Enquire about speaking</Link>
+                <Link href="/keynotes" className="btn-outline">Explore speaking topics</Link>
               </div>
             </div>
           </AnimateIn>
@@ -129,11 +135,14 @@ export default function AboutPage() {
       <section style={{ padding: '6rem 2rem', background: 'var(--color-navy)' }}>
         <AnimateIn>
           <div style={{ maxWidth: 620, margin: '0 auto', textAlign: 'center' }}>
-            <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '1rem' }}>Book Elliot for your event</h2>
+            <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '1rem' }}>Bring Elliot to your event</h2>
             <p style={{ color: 'rgba(255,255,255,0.75)', marginBottom: '2.5rem' }}>
-              Keynotes, workshops, corporate consultancy, or media enquiries — get in touch to discuss how Elliot can help.
+              Keynotes, panels, workshops and virtual sessions for corporate, financial-services and professional audiences.
             </p>
-            <Link href="/contact" className="btn-primary">Make an enquiry</Link>
+            <Link href="/contact" className="btn-primary" style={{ background: '#fff', color: '#111111' }}>Enquire about speaking</Link>
+            <p style={{ marginTop: '1.75rem', fontSize: '0.875rem' }}>
+              <Link href="/contact?type=media" style={{ color: 'rgba(255,255,255,0.75)', textDecoration: 'underline' }}>Media enquiries</Link>
+            </p>
           </div>
         </AnimateIn>
       </section>
