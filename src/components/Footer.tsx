@@ -5,23 +5,26 @@ const cols = [
     heading: 'Elliot Castro',
     links: [
       { href: '/about', label: 'About Elliot' },
-      { href: '/keynotes', label: 'Keynotes' },
-      { href: '/contact', label: 'Enquire' },
+      { href: '/keynotes', label: 'Speaking' },
+      { href: '/consultancy', label: 'Consultancy & advisory' },
+      { href: '/#watch', label: 'Watch Elliot speak' },
     ],
   },
   {
-    heading: 'Keynote Topics',
+    heading: 'Speaking topics',
     links: [
-      { href: '/keynotes#fraud-prevention', label: 'Fraud Prevention' },
-      { href: '/keynotes#cybersecurity', label: 'Cybersecurity' },
-      { href: '/keynotes#social-engineering', label: 'Social Engineering' },
-      { href: '/keynotes#psychology', label: 'Criminal Psychology' },
-      { href: '/keynotes#insider-threats', label: 'Insider Threats' },
+      { href: '/keynotes#fraud-psychology', label: 'Fraud Psychology & the Criminal Mindset' },
+      { href: '/keynotes#social-engineering', label: 'Social Engineering, Trust & Human Behaviour' },
+      { href: '/keynotes#identity-impersonation', label: 'Identity, Impersonation & Human Verification' },
+      { href: '/keynotes#ai-enabled-deception', label: 'Modern Fraud & AI-Enabled Deception' },
     ],
   },
   {
-    heading: 'Legal',
+    heading: 'Contact',
     links: [
+      { href: '/contact', label: 'Enquire about speaking' },
+      { href: '/contact?type=media', label: 'Media enquiries' },
+      { href: '/contact?type=general', label: 'Get in touch' },
       { href: '/privacy-policy', label: 'Privacy Policy' },
       { href: '/terms', label: 'Terms & Conditions' },
     ],
@@ -38,10 +41,10 @@ export default function Footer() {
           <div>
             <p style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem' }}>Elliot Castro</p>
             <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, maxWidth: 260 }}>
-              Keynote speaker and consultant on fraud, cybersecurity, and criminal psychology.
+              Fraud keynote speaker &middot; Fraud psychology &middot; Social engineering &middot; Identity &amp; trust &middot; Human behaviour.
             </p>
             <Link href="/contact" style={{ display: 'inline-block', marginTop: '1.5rem', background: 'var(--color-green)', color: '#fff', padding: '0.75rem 1.5rem', fontSize: '0.8125rem', fontWeight: 600, letterSpacing: '0.04em' }}>
-              Book a talk
+              Enquire about speaking
             </Link>
           </div>
 

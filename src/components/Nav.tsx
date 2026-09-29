@@ -5,20 +5,16 @@ import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown } from 'lucide-react'
 
 const topicLinks = [
-  { label: 'Fraud Prevention', href: '/keynotes#fraud-prevention' },
-  { label: 'Cybersecurity Awareness', href: '/keynotes#cybersecurity' },
-  { label: 'Identity Theft', href: '/keynotes#identity-theft' },
-  { label: 'Social Engineering', href: '/keynotes#social-engineering' },
-  { label: 'Criminal Psychology', href: '/keynotes#psychology' },
-  { label: 'Insider Threats', href: '/keynotes#insider-threats' },
-  { label: 'Risk Management', href: '/keynotes#risk-management' },
-  { label: 'Ethics & Transformation', href: '/keynotes#ethics' },
+  { label: 'Fraud Psychology & the Criminal Mindset', href: '/keynotes#fraud-psychology' },
+  { label: 'Social Engineering, Trust & Human Behaviour', href: '/keynotes#social-engineering' },
+  { label: 'Identity, Impersonation & Human Verification', href: '/keynotes#identity-impersonation' },
+  { label: 'Modern Fraud & AI-Enabled Deception', href: '/keynotes#ai-enabled-deception' },
 ]
 
 const navLinks = [
   { href: '/about', label: 'About' },
-  { href: '/keynotes', label: 'Topics', dropdown: true },
-  { href: '/case-studies', label: 'Case Studies' },
+  { href: '/keynotes', label: 'Speaking', dropdown: true },
+  { href: '/consultancy', label: 'Consultancy' },
 ]
 
 export default function Nav() {
@@ -104,7 +100,7 @@ export default function Nav() {
                     padding: '0.5rem 0',
                   }}>
                     <Link href="/keynotes" style={{ display: 'block', padding: '0.625rem 1.25rem', fontSize: '0.8125rem', fontWeight: 600, color: '#111111', borderBottom: '1px solid #e5e5e5', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                      All topics
+                      All speaking topics
                     </Link>
                     {topicLinks.map(t => (
                       <Link key={t.href} href={t.href} style={{ display: 'block', padding: '0.5rem 1.25rem', fontSize: '0.875rem', color: '#737373', transition: 'color 0.15s, background 0.15s' }}
@@ -124,7 +120,7 @@ export default function Nav() {
             )
           )}
           <Link href="/contact" className="btn-primary" style={{ padding: '0.625rem 1.5rem', fontSize: '0.75rem' }}>
-            Book Elliot
+            Enquire about speaking
           </Link>
         </nav>
 
@@ -155,7 +151,7 @@ export default function Nav() {
             </div>
           ))}
           <Link href="/contact" className="btn-primary" style={{ display: 'block', textAlign: 'center', marginTop: '1.5rem' }}>
-            Book Elliot
+            Enquire about speaking
           </Link>
         </div>
       )}
