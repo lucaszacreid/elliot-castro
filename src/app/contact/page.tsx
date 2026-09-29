@@ -1,13 +1,25 @@
 import type { Metadata } from 'next'
 import AnimateIn from '@/components/AnimateIn'
 import EnquiryForm from '@/components/EnquiryForm'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Speaking, consultancy, media, and general enquiries for Elliot Castro.',
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Enquire About Speaking',
+  socialTitle: 'Enquire About Speaking | Elliot Castro',
+  description: 'Speaking, consultancy, advisory and media enquiries for fraud keynote speaker Elliot Castro.',
+  path: '/contact',
+})
 
-export default function ContactPage() {
+const ENQUIRY_TYPES = ['keynote', 'consultancy', 'media', 'general']
+
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const { type } = await searchParams
+  const enquiryType = typeof type === 'string' && ENQUIRY_TYPES.includes(type) ? type : 'keynote'
+
   return (
     <>
       {/* ── Header ── */}
@@ -16,13 +28,13 @@ export default function ContactPage() {
           <AnimateIn>
             <p className="section-label" style={{ color: 'rgba(255,255,255,0.6)' }}>Get in touch</p>
             <h1 style={{ color: '#fff', fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', maxWidth: 600, lineHeight: 1.12, marginBottom: '1.25rem' }}>
-              Let's talk.
+              Enquire about speaking
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.7)', maxWidth: 480, lineHeight: 1.8 }}>
-              Elliot responds to all serious enquiries personally. Use the form below or email{' '}
+              For speaking, consultancy, advisory and media enquiries, use the form below or email{' '}
               <a href="mailto:elliot@elliotcastro.com" style={{ color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.4)' }}>
                 elliot@elliotcastro.com
-              </a>
+              </a>. Elliot responds to all serious enquiries personally.
             </p>
           </AnimateIn>
         </div>
@@ -34,13 +46,13 @@ export default function ContactPage() {
 
           {/* Sidebar */}
           <AnimateIn>
-            <h2 style={{ fontSize: '1.375rem', marginBottom: '1rem', lineHeight: 1.3 }}>What can Elliot help with?</h2>
+            <h2 style={{ fontSize: '1.375rem', marginBottom: '1rem', lineHeight: 1.3 }}>How Elliot can help</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               {[
-                { title: 'Keynote Speaking', desc: 'Book Elliot for conferences, corporate events, or private briefings. Talks tailored to your audience and sector.' },
-                { title: 'Consultancy', desc: 'Fraud risk advisory, employee training, policy review, and incident response support.' },
-                { title: 'Media', desc: 'Expert commentary for broadcast, print, and digital. Short deadlines welcome.' },
-                { title: 'Workshop & Training', desc: 'Half-day or full-day sessions for teams, delivered in-person or virtually.' },
+                { title: 'Speaking', desc: 'Keynotes, panels, workshops and virtual sessions on fraud psychology, social engineering, identity and impersonation, and AI-enabled deception. Tailored to your sector and audience.' },
+                { title: 'Consultancy & advisory', desc: 'First-hand insight into how criminals build trust, gather information and exploit the gaps between people, identity and process.' },
+                { title: 'Media', desc: 'Commentary on fraud, scams, social engineering, impersonation and AI-enabled deception. Choose “Media” as the enquiry type.' },
+                { title: 'General enquiries', desc: 'Anything else – choose “General enquiry” and Elliot will get back to you.' },
               ].map(item => (
                 <div key={item.title} style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.25rem' }}>
                   <p style={{ fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.375rem', fontSize: '0.9375rem' }}>{item.title}</p>
@@ -59,7 +71,7 @@ export default function ContactPage() {
 
           {/* Form */}
           <AnimateIn delay={120}>
-            <EnquiryForm defaultType="keynote" />
+            <EnquiryForm key={enquiryType} defaultType={enquiryType} />
           </AnimateIn>
         </div>
       </section>

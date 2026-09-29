@@ -23,15 +23,29 @@ const labelStyle: React.CSSProperties = {
 
 const fields = [
   { name: 'name', label: 'Full name', type: 'text' as const, required: true, placeholder: 'Your name' },
+  { name: 'organisation', label: 'Organisation', type: 'text' as const, placeholder: 'Company or event organiser' },
   { name: 'email', label: 'Email address', type: 'email' as const, required: true, placeholder: 'you@example.com' },
   { name: 'phone', label: 'Phone number (optional)', type: 'tel' as const, placeholder: '+44 7000 000000' },
-  { name: 'organisation', label: 'Organisation', type: 'text' as const, placeholder: 'Company or event name' },
 ]
+
+// Shown for speaking enquiries only. The API stores a fixed set of columns, so these
+// are folded into the message before submitting rather than sent as new fields.
+const speakingFields = [
+  { name: 'location', label: 'Event location', placeholder: 'City and venue, or virtual' },
+  { name: 'audience', label: 'Audience', placeholder: 'e.g. 250 heads of fraud and risk from UK banks' },
+  { name: 'budget', label: 'Approximate budget', placeholder: 'Speaking fee budget, if known' },
+  { name: 'recording', label: 'Recording and usage requirements', placeholder: 'e.g. filmed for internal use, livestreamed, not recorded' },
+  { name: 'travel', label: 'Travel expectations', placeholder: 'e.g. UK travel, international, overnight stay' },
+]
+
+const formatOptions = ['Keynote', 'Panel', 'Workshop', 'Virtual', 'Fireside chat / Q&A', 'Not sure yet']
 
 export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?: string }) {
   const [formData, setFormData] = useState<Record<string, string>>({
     name: '', email: '', phone: '', organisation: '', type: defaultType, eventDate: '', message: '',
+    location: '', audience: '', format: '', budget: '', recording: '', travel: '',
   })
+  const isSpeaking = formData.type === 'keynote'
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const honeypotRef = useRef<HTMLInputElement>(null)
@@ -47,6 +61,23 @@ export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?:
     e.target.style.borderColor = 'var(--color-border)'
   }
 
+  function buildPayload() {
+    const { name, email, phone, organisation, type, eventDate, message } = formData
+    if (!isSpeaking) return { name, email, phone, organisation, type, eventDate: '', message }
+    const details = [
+      ['Location', formData.location],
+      ['Audience', formData.audience],
+      ['Format', formData.format],
+      ['Approximate budget', formData.budget],
+      ['Recording / usage', formData.recording],
+      ['Travel', formData.travel],
+    ].filter(([, v]) => v.trim()).map(([k, v]) => `${k}: ${v.trim()}`)
+    const fullMessage = details.length
+      ? `Speaking details\n${details.join('\n')}${message.trim() ? `\n\nMessage\n${message}` : ''}`
+      : message
+    return { name, email, phone, organisation, type, eventDate, message: fullMessage }
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (honeypotRef.current?.value) return
@@ -56,7 +87,7 @@ export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?:
       const res = await fetch('/api/enquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(buildPayload()),
       })
       if (!res.ok) {
         const body = await res.text()
@@ -112,24 +143,58 @@ export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?:
           onFocus={focusBorder} onBlur={blurBorder}
           style={{ ...inputStyle, cursor: 'pointer', appearance: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center' }}
         >
-          <option value="keynote">Keynote speaking</option>
-          <option value="consultancy">Consultancy</option>
-          <option value="media">Media / press</option>
-          <option value="workshop">Workshop / training</option>
+          <option value="keynote">Speaking enquiry</option>
+          <option value="consultancy">Consultancy &amp; advisory</option>
+          <option value="media">Media</option>
           <option value="general">General enquiry</option>
         </select>
       </div>
 
-      <div>
-        <label htmlFor="eventDate" style={labelStyle}>Event date (optional)</label>
-        <input id="eventDate" name="eventDate" type="date" value={formData.eventDate} onChange={handleChange}
-          onFocus={focusBorder} onBlur={blurBorder} style={inputStyle} />
-      </div>
+      {isSpeaking && (
+        <>
+          <div>
+            <label htmlFor="eventDate" style={labelStyle}>Event date</label>
+            <input id="eventDate" name="eventDate" type="date" value={formData.eventDate} onChange={handleChange}
+              onFocus={focusBorder} onBlur={blurBorder} style={inputStyle} />
+          </div>
+
+          {speakingFields.slice(0, 2).map(f => (
+            <div key={f.name}>
+              <label htmlFor={f.name} style={labelStyle}>{f.label}</label>
+              <input id={f.name} name={f.name} type="text" placeholder={f.placeholder}
+                value={formData[f.name]} onChange={handleChange}
+                onFocus={focusBorder} onBlur={blurBorder} style={inputStyle} />
+            </div>
+          ))}
+
+          <div>
+            <label htmlFor="format" style={labelStyle}>Format</label>
+            <select id="format" name="format" value={formData.format} onChange={handleChange}
+              onFocus={focusBorder} onBlur={blurBorder}
+              style={{ ...inputStyle, cursor: 'pointer', appearance: 'none', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center' }}
+            >
+              <option value="">Select a format</option>
+              {formatOptions.map(o => <option key={o} value={o}>{o}</option>)}
+            </select>
+          </div>
+
+          {speakingFields.slice(2).map(f => (
+            <div key={f.name}>
+              <label htmlFor={f.name} style={labelStyle}>{f.label}</label>
+              <input id={f.name} name={f.name} type="text" placeholder={f.placeholder}
+                value={formData[f.name]} onChange={handleChange}
+                onFocus={focusBorder} onBlur={blurBorder} style={inputStyle} />
+            </div>
+          ))}
+        </>
+      )}
 
       <div>
         <label htmlFor="message" style={labelStyle}>Message<span style={{ color: 'var(--color-green)', marginLeft: 2 }}>*</span></label>
         <textarea id="message" name="message" required rows={5}
-          placeholder="Tell Elliot about your event, audience, and what you're hoping to achieve."
+          placeholder={isSpeaking
+            ? 'Anything else Elliot should know – your objectives, themes or the topics that interest you most.'
+            : 'Tell Elliot what you are looking for.'}
           value={formData.message} onChange={handleChange}
           onFocus={focusBorder} onBlur={blurBorder}
           style={{ ...inputStyle, resize: 'vertical' }}
@@ -144,7 +209,7 @@ export default function EnquiryForm({ defaultType = 'keynote' }: { defaultType?:
 
       <button type="submit" disabled={status === 'submitting'} className="btn-primary"
         style={{ alignSelf: 'flex-start', opacity: status === 'submitting' ? 0.65 : 1, cursor: status === 'submitting' ? 'not-allowed' : 'pointer' }}>
-        {status === 'submitting' ? 'Sending…' : 'Send enquiry'}
+        {status === 'submitting' ? 'Sending…' : isSpeaking ? 'Send speaking enquiry' : 'Send enquiry'}
       </button>
 
       <p style={{ fontSize: '0.8125rem', color: 'var(--color-mid-grey)' }}>
