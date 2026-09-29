@@ -23,7 +23,11 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* keep anchor targets clear of the fixed 72px header */
+  scroll-padding-top: 88px;
+}
 
 body {
   background-color: var(--color-white);
@@ -195,6 +199,31 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
 }
 .doc-link:hover .doc-footer {
   color: rgba(255,255,255,0.6);
+}
+
+/* ── Card grids: column counts match item counts so rows never leave empty cells ── */
+.grid-cell { height: 100%; }
+
+.cards-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 1024px) {
+  .cards-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Footer: brand + 3 link columns → 4 / 2×2 / 1 */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+}
+@media (max-width: 1023px) {
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; }
 }
 
 /* ── Topics grid (homepage) ── */

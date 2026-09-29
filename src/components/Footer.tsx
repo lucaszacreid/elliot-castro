@@ -28,7 +28,7 @@ export default function Footer() {
     <footer style={{ background: 'var(--color-navy)', color: '#fff', padding: '5rem 2rem 2.5rem' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '4rem' }}>
+        <div className="footer-grid" style={{ marginBottom: '4rem' }}>
           {/* Brand column */}
           <div>
             <p style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem' }}>Elliot Castro</p>

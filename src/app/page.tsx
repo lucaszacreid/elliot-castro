@@ -6,6 +6,7 @@ import TrustBar from '@/components/TrustBar'
 import InActionGallery from '@/components/InActionGallery'
 import EnquiryForm from '@/components/EnquiryForm'
 import TopicGrid from '@/components/TopicGrid'
+import Testimonials from '@/components/Testimonials'
 import { SHORT_BIO_FIRST_PARAGRAPH } from '@/lib/topics'
 
 export const metadata: Metadata = {
@@ -13,10 +14,10 @@ export const metadata: Metadata = {
   description: SHORT_BIO_FIRST_PARAGRAPH,
 }
 
-const testimonials = [
-  { quote: '[Testimonial quote — copy pending from Elliot]', author: '[Name, Title]', org: '[Organisation]' },
-  { quote: '[Testimonial quote — copy pending from Elliot]', author: '[Name, Title]', org: '[Organisation]' },
-  { quote: '[Testimonial quote — copy pending from Elliot]', author: '[Name, Title]', org: '[Organisation]' },
+const takeaways = [
+  { title: 'A view from the other side.', text: 'First-hand insight into how fraudsters think, build trust, gather information and exploit processes.' },
+  { title: 'Accessible, story-led and practical.', text: 'Complex fraud and behavioural issues made clear for non-technical audiences.' },
+  { title: 'Relevant to today’s threats.', text: 'Lived experience connected to modern fraud prevention, organisational risk and AI-enabled deception.' },
 ]
 
 const BBC_DOC_URL = 'https://www.bbc.co.uk/iplayer/episodes/m001zx5p/confessions-of-a-teenage-fraudster'
@@ -142,38 +143,28 @@ export default function HomePage() {
       {/* ── Trust bar 4 ── */}
       <TrustBar />
 
-      {/* ── What people say ── */}
+      {/* ── What audiences take away ── */}
       <section style={{ padding: '6rem 2rem', background: 'var(--color-off-white)' }}>
         <div className="container">
           <AnimateIn>
-            <p className="section-label">What people say</p>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '0.75rem', marginTop: '0.75rem' }}>
-              Trusted by organisations across the UK.
+            <p className="section-label">What audiences take away</p>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '3.5rem', marginTop: '0.75rem' }}>
+              Why organisations book Elliot
             </h2>
-            <p style={{ color: 'var(--color-mid-grey)', maxWidth: 480, lineHeight: 1.75, marginBottom: '3.5rem' }}>
-              From financial services and corporate security to media and public sector — organisations that book Elliot come away with changed perspectives.
-            </p>
           </AnimateIn>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1px', background: 'var(--color-border)' }}>
-            {testimonials.map((t, i) => (
-              <AnimateIn key={i} delay={i * 100}>
-                <div style={{ background: '#fff', padding: '2.5rem' }}>
-                  <p style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontSize: '1rem', fontStyle: 'italic', color: 'var(--color-navy)', lineHeight: 1.75, marginBottom: '1.5rem' }}>
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                  <p style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-navy)' }}>{t.author}</p>
-                  <p style={{ fontSize: '0.8125rem', color: 'var(--color-mid-grey)' }}>{t.org}</p>
+          <div className="cards-3">
+            {takeaways.map((t, i) => (
+              <AnimateIn key={t.title} delay={i * 100} className="grid-cell">
+                <div style={{ background: '#fff', border: '1px solid var(--color-border)', padding: '2.5rem', height: '100%' }}>
+                  <p style={{ fontWeight: 600, color: 'var(--color-navy)', fontSize: '1rem', marginBottom: '0.5rem' }}>{t.title}</p>
+                  <p style={{ color: 'var(--color-mid-grey)', fontSize: '0.9375rem', lineHeight: 1.75 }}>{t.text}</p>
                 </div>
               </AnimateIn>
             ))}
           </div>
 
-          <AnimateIn delay={300}>
-            <div style={{ paddingTop: '2.5rem' }}>
-              <Link href="/case-studies" className="btn-outline">View case studies</Link>
-            </div>
-          </AnimateIn>
+          <Testimonials />
         </div>
       </section>
 
