@@ -40,12 +40,24 @@ export default function InActionGallery() {
   }
 
   return (
-    <section style={{ padding: '6rem 0 5rem', background: '#0a0a0a' }}>
+    <section id="watch" style={{ padding: '6rem 0 5rem', background: '#0a0a0a' }}>
       <div className="container">
         <p className="section-label" style={{ color: 'rgba(255,255,255,0.4)' }}>Elliot in action</p>
-        <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '3rem', marginTop: '0.75rem' }}>
-          Seen on the biggest stages.
+        <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '0.75rem', marginTop: '0.75rem' }}>
+          Watch Elliot speak.
         </h2>
+        <p style={{ color: 'rgba(255,255,255,0.45)', maxWidth: 480, lineHeight: 1.8, marginBottom: '3rem', fontSize: '0.9375rem' }}>
+          Accessible, story-led and non-technical &ndash; see how Elliot brings the human mechanics of fraud to life for corporate and financial-services audiences.
+        </p>
+
+        {/* TODO: replace with embedded video of Elliot on stage ({{VIDEO_ELLIOT_ON_STAGE}}) */}
+        <div className="doc-link" style={{ marginBottom: '4rem' }}>
+          <div className="doc-thumb" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px dashed rgba(255,255,255,0.12)' }}>
+            <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em', lineHeight: 1.8, textAlign: 'center', padding: '0 2rem' }}>
+              [Video: Elliot speaking on stage &mdash; showreel pending from Elliot]
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Full-width slide area */}
