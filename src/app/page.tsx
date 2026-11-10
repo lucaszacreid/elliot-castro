@@ -7,6 +7,7 @@ import InActionGallery from '@/components/InActionGallery'
 import EnquiryForm from '@/components/EnquiryForm'
 import TopicGrid from '@/components/TopicGrid'
 import Testimonials from '@/components/Testimonials'
+import Articles from '@/components/Articles'
 import { SHORT_BIO_FIRST_PARAGRAPH } from '@/lib/topics'
 
 export const metadata: Metadata = {
@@ -106,6 +107,9 @@ export default function HomePage() {
           </AnimateIn>
         </div>
       </section>
+
+      {/* ── Articles ── */}
+      <Articles />
 
       {/* ── Trust bar 2 ── */}
       <TrustBar />

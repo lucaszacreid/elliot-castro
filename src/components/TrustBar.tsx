@@ -1,9 +1,17 @@
 import Image from 'next/image'
 
+const LOGO_HEIGHT = 56
+
 const logos = [
-  { src: '/logos/bbc.jpg', alt: 'BBC', w: 120, h: 48 },
-  { src: '/logos/experian.jpg', alt: 'Experian', w: 140, h: 48 },
-  { src: '/logos/monzo.jpg', alt: 'Monzo', w: 110, h: 48 },
+  { src: '/logos/bbc.jpg', alt: 'BBC', w: 140, h: LOGO_HEIGHT },
+  { src: '/logos/experian.jpg', alt: 'Experian', w: 163, h: LOGO_HEIGHT },
+  { src: '/logos/monzo.jpg', alt: 'Monzo', w: 128, h: LOGO_HEIGHT },
+  { src: '/logos/danone.png', alt: 'Danone', w: 92, h: LOGO_HEIGHT },
+  { src: '/logos/riskified.png', alt: 'Riskified', w: 142, h: LOGO_HEIGHT },
+  { src: '/logos/iata.png', alt: 'IATA', w: 78, h: LOGO_HEIGHT },
+  { src: '/logos/raiffeisen.png', alt: 'Raiffeisen Bank International', w: 130, h: LOGO_HEIGHT },
+  { src: '/logos/skipton.png', alt: 'Skipton Building Society', w: 64, h: LOGO_HEIGHT },
+  { src: '/logos/met-police.png', alt: 'Metropolitan Police', w: 103, h: LOGO_HEIGHT },
 ]
 
 // 18 per half → ~18 × 230px ≈ 4140px — wider than any viewport so no black gap on loop
@@ -23,7 +31,7 @@ export default function TrustBar() {
                 alt={logo.alt}
                 width={logo.w}
                 height={logo.h}
-                style={{ height: 48, width: 'auto', objectFit: 'contain' }}
+                style={{ height: LOGO_HEIGHT, width: 'auto', objectFit: 'contain' }}
                 unoptimized
                 loading="eager"
               />

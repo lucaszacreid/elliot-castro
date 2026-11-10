@@ -1,11 +1,14 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 
-const slides = [
-  '[Photo: Elliot on stage at corporate conference — image pending from Elliot]',
-  '[Photo: Elliot delivering keynote to large audience — image pending from Elliot]',
-  '[Photo: Elliot at close-up keynote moment — image pending from Elliot]',
-  '[Photo: Elliot at broadcast or media appearance — image pending from Elliot]',
+type Slide = { image: string; alt: string } | { caption: string }
+
+const slides: Slide[] = [
+  { image: '/stage-financial-fraud-forum.jpg', alt: 'Elliot Castro speaking on stage at the Financial Fraud Forum' },
+  { image: '/stage-wide-audience.jpg', alt: 'Elliot Castro on stage in front of a full auditorium at the Financial Fraud Forum' },
+  { image: '/stage-gesture-closeup.jpg', alt: 'Elliot Castro mid-keynote, close-up' },
+  { image: '/stage-close-up.webp', alt: 'Elliot Castro on stage' },
 ]
 
 const INTERVAL = 4500
@@ -57,7 +60,7 @@ export default function InActionGallery() {
         role="img"
         aria-label="Gallery of Elliot Castro speaking"
       >
-        {slides.map((caption, i) => (
+        {slides.map((slide, i) => (
           <div
             key={i}
             style={{
@@ -65,20 +68,30 @@ export default function InActionGallery() {
               background: i % 2 === 0 ? '#151515' : '#1d1d1d',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               opacity: i === idx ? 1 : 0,
-              transition: reduced ? 'none' : 'opacity 0.8s ease',
+              transition: reduced ? 'none' : 'opacity 0.35s ease',
               pointerEvents: i === idx ? 'auto' : 'none',
             }}
           >
-            <div style={{
-              border: '1px dashed rgba(255,255,255,0.07)',
-              padding: '2rem 3rem',
-              maxWidth: 480,
-              textAlign: 'center',
-            }}>
-              <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.22)', letterSpacing: '0.06em', lineHeight: 1.8 }}>
-                {caption}
-              </p>
-            </div>
+            {'image' in slide ? (
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'center 25%' }}
+                unoptimized
+              />
+            ) : (
+              <div style={{
+                border: '1px dashed rgba(255,255,255,0.07)',
+                padding: '2rem 3rem',
+                maxWidth: 480,
+                textAlign: 'center',
+              }}>
+                <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.22)', letterSpacing: '0.06em', lineHeight: 1.8 }}>
+                  {slide.caption}
+                </p>
+              </div>
+            )}
           </div>
         ))}
       </div>
