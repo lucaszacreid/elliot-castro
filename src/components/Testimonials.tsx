@@ -39,7 +39,7 @@ export default function Testimonials() {
   if (testimonials.length === 0) return null
 
   return (
-    <div className="cards-3" style={{ marginTop: '1.5rem' }}>
+    <div className="testimonial-grid" style={{ marginTop: '1.5rem' }}>
       {testimonials.map((t, i) => (
         <AnimateIn key={i} delay={i * 100} className="grid-cell">
           <div style={{ background: '#fff', border: '1px solid var(--color-border)', padding: '2.5rem', height: '100%' }}>
