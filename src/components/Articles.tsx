@@ -9,9 +9,16 @@ const articles: Article[] = [
   {
     outlet: 'The Times',
     logo: '/logos/the-times.png',
-    headline: 'PLACEHOLDER — confirm exact headline',
+    headline: 'Elliot Castro: how a call centre worker became one of UK’s most prolific scammers',
     date: 'PLACEHOLDER — confirm date',
     url: 'https://www.thetimes.com/uk/scotland/article/elliot-castro-scammer-fraudster-5w9wc666h',
+  },
+  {
+    outlet: 'BBC News',
+    logo: '/logos/bbc.jpg',
+    headline: 'The teenage con artist behind a £2.5m global crime spree',
+    date: '7 June 2024',
+    url: 'https://www.bbc.co.uk/news/articles/c9xxejwek5po',
   },
 ]
 
@@ -37,13 +44,17 @@ export default function Articles() {
                 rel="noopener noreferrer"
                 className="article-link"
               >
-                {a.logo ? (
-                  <Image src={a.logo} alt={a.outlet} width={90} height={24} style={{ height: 20, width: 'auto', objectFit: 'contain', flexShrink: 0 }} unoptimized />
-                ) : (
-                  <span className="article-outlet">{a.outlet}</span>
-                )}
-                <span className="article-headline">{a.headline}</span>
-                <span className="article-date">{a.date}</span>
+                <span className="article-logo">
+                  {a.logo ? (
+                    <Image src={a.logo} alt={a.outlet} width={120} height={56} style={{ height: 40, width: 'auto', objectFit: 'contain' }} unoptimized />
+                  ) : (
+                    <span className="article-outlet">{a.outlet}</span>
+                  )}
+                </span>
+                <span className="article-body">
+                  <span className="article-headline">{a.headline}</span>
+                  <span className="article-date">{a.date}</span>
+                </span>
                 <span className="article-arrow">→</span>
               </a>
             </AnimateIn>

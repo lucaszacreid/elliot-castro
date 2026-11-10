@@ -46,9 +46,13 @@ export default function InActionGallery() {
     <section style={{ padding: '6rem 0 5rem', background: '#0a0a0a' }}>
       <div className="container">
         <p className="section-label" style={{ color: 'rgba(255,255,255,0.4)' }}>Elliot in action</p>
-        <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '3rem', marginTop: '0.75rem' }}>
+        <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '0.75rem', marginTop: '0.75rem' }}>
           Seen on the biggest stages.
         </h2>
+        {/* All 4 current photos are from this event — update/remove when new photos come in */}
+        <p style={{ fontSize: '0.75rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '2.25rem' }}>
+          Financial Fraud Forum 2026
+        </p>
       </div>
 
       {/* Full-width slide area */}
