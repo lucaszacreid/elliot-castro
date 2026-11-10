@@ -271,21 +271,6 @@ input, textarea, select { font-family: var(--font-inter), sans-serif; }
   .cards-3 { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Testimonials: flex-wrap instead of a rigid 3-col grid, so a non-multiple-of-3
-   count (e.g. 5) centers its last, partial row instead of leaving a gap. */
-.testimonial-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-}
-.testimonial-grid > * {
-  flex: 1 1 100%;
-}
-@media (min-width: 1024px) {
-  .testimonial-grid > * { flex: 0 1 calc((100% - 3rem) / 3); }
-}
-
 /* Footer: brand + 3 link columns → 4 / 2×2 / 1 */
 .footer-grid {
   display: grid;
